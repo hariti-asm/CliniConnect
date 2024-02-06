@@ -26,8 +26,8 @@ class MedicalRecord extends Model
         return $this->belongsTo(Medication::class, 'prescription');
     }
 
-    public function certificate()
-    {
-        return $this->belongsTo(Certificate::class);
-    }
+    // public function certificate()
+    // {
+    //     return $this->belongsTo(Certificate::class);
+    // }
 }

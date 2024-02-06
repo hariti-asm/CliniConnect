@@ -339,10 +339,11 @@ http://www.tooplate.com/view/2098-health
                                    <div class="col-md-6 col-sm-6">
                                         <label for="select">Select Department</label>
                                         <select class="form-control">
-                                             <option>General Health</option>
-                                             <option>Cardiology</option>
-                                             <option>Dental</option>
-                                             <option>Medical Research</option>
+                                             @foreach ($specialities as $item)
+                                                 
+                                             <option><?=$item->name?></option>
+                                           
+                                             @endforeach
                                         </select>
                                    </div>
 
