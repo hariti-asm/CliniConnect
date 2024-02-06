@@ -152,28 +152,35 @@
               </div>
       
               <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <!-- Loop through each doctor -->
                   @foreach($doctors as $doctor)
                   <div class="rounded-lg overflow-hidden shadow-md bg-white">
-                      <img src="{{$doctor->image}}" class="w-full h-40 object-cover object-center rounded-full" alt="Doctor Image"> <!-- Replace with actual image URL -->
+                      <img src="{{$doctor->image}}" class="w-32 h-32 object-cover object-center rounded-full" alt="Doctor Image">
                       <div class="p-4">
-                          <h3 class="text-lg font-semibold mb-2">{{ $doctor->name }}</h3> <!-- Assuming 'name' is the field containing the doctor's name -->
-                           <p>{{ $doctor->speciality->name }}</p>
-      
-                          <div class="flex items-center">
-                             
-                              <i class="fa fa-star text-yellow-500"></i>
-                              <i class="fa fa-star text-yellow-500"></i>
-                              <i class="fa fa-star text-yellow-500"></i>
-                              <i class="fa fa-star text-yellow-500"></i>
-                              <i class="fa fa-star text-yellow-500"></i>
+                          <h3 class="text-lg font-semibold mb-2">{{ $doctor->name }}</h3>
+                          <p>{{ $doctor->speciality->name }}</p>
+                                <div class="flex items-center justify-between">
+                              <!-- Stars -->
+                              <div class="flex items-center">
+                                  <i class="fa fa-star text-yellow-500"></i>
+                                  <i class="fa fa-star text-yellow-500"></i>
+                                  <i class="fa fa-star text-yellow-500"></i>
+                                  <i class="fa fa-star text-yellow-500"></i>
+                                  <i class="fa fa-star text-yellow-500"></i>
+                              </div>
+                              <a href="#" class="mt-4 inline-block bg-[#c3df4a] hover:bg-green-200 text-white font-bold py-2 px-4 rounded">See Details</a>
                           </div>
                       </div>
                   </div>
                   @endforeach
               </div>
+               <div class="mt-8 flex justify-center">
+                    {{ $doctors->links() }}
+               </div>
+               
           </div>
       </section>
+      
+      
       
       
 
