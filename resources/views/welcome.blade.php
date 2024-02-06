@@ -167,7 +167,7 @@
                                   <i class="fa fa-star text-yellow-500"></i>
                                   <i class="fa fa-star text-yellow-500"></i>
                               </div>
-                              <a href="#" class="mt-4 inline-block bg-[#c3df4a] hover:bg-green-200 text-white font-bold py-2 px-4 rounded">See Details</a>
+                              <a href="#" class="mt-4 inline-block bg-[#c3df4a] hover:bg-[#9ebb21] hover:text-white text-white font-bold py-2 px-4 rounded">See Details</a>
                           </div>
                       </div>
                   </div>
