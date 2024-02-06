@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Speciality;
+use App\Models\User;
 class SpecialitiesController extends Controller
 {
     public function getSpecialities(){
         $specialities=Speciality::all();
-        return view('welcome',['specialities'=>$specialities]);
+        $doctors=User::where('user_type',2)->get();
+        return view('welcome',compact('specialities','doctors'));
     }
+  
 }

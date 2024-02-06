@@ -12,7 +12,7 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
+    {Schema :: disableForeignKeyConstraints();
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -20,8 +20,10 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->integer('user_type')->nullable();
-            $table->integer('speciality_id')->nullable();
-            $table->integer('image')->nullable();
+            $table->text('phone')->nullable();
+
+            $table->string('image')->nullable();
+            $table->foreignId('speciality_id')->nullable()->constrained('specialities');
 
             $table->rememberToken();
             $table->timestamps();
