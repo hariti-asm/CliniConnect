@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SpecialitiesController;
+use App\Http\Controllers\DoctorController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [SpecialitiesController::class,'getSpecialities']);
-
+Route::get('/doctor_detail/{id}',[DoctorController::class,'doctor_detail'])->name('doctor_detail');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

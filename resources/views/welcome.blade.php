@@ -2,14 +2,7 @@
 <html lang="en">
 <head>
 
-     <title>Health - Medical Website Template</title>
-<!--
-     
-     Template 2098 Health
-     
-     http://www.tooplate.com/view/2098-health
-     
--->
+     <title>ClinniConnect</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <meta charset="UTF-8">
      <meta http-equiv="X-UA-Compatible" content="IE=Edge">
@@ -61,14 +54,25 @@
 
                <!-- MENU LINKS -->
                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
+                    {{-- <ul class="nav navbar-nav navbar-right">
                          <li><a href="#top" class="smoothScroll">Home</a></li>
                          <li><a href="#about" class="smoothScroll">About Us</a></li>
                          <li><a href="#team" class="smoothScroll">Doctors</a></li>
                          <li><a href="#news" class="smoothScroll">News</a></li>
                          <li><a href="#google-map" class="smoothScroll">Contact</a></li>
                          <li class="appointment-btn"><a href="#appointment">Make an appointment</a></li>
-                    </ul>
+                    </ul> --}}
+                    @if (Route::has('login'))
+                    @auth
+                        <a href="{{ url('/dashboard') }}" class="text-5xl text-black dark:text-gray-500 underline">Dashboard</a>
+                    @else
+                        <a href="{{ route('login') }}" class="text-sm text-black dark:text-gray-500 underline">Log in</a>
+
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}" class="ml-4 text-sm text-blackdark:text-gray-500 underline">Register</a>
+                        @endif
+                    @endauth
+            @endif 
                </div>
 
           </div>
@@ -167,7 +171,8 @@
                                   <i class="fa fa-star text-yellow-500"></i>
                                   <i class="fa fa-star text-yellow-500"></i>
                               </div>
-                              <a href="#" class="mt-4 inline-block bg-[#c3df4a] hover:bg-[#9ebb21] hover:text-white text-white font-bold py-2 px-4 rounded">See Details</a>
+
+                              <a href="{{route('doctor_detail',['id'=>$doctor->id])}}" class="mt-4 inline-block bg-[#c3df4a] hover:bg-[#9ebb21] hover:text-white text-white font-bold py-2 px-4 rounded">See Details</a>
                           </div>
                       </div>
                   </div>
