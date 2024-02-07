@@ -8,7 +8,7 @@
 </head>
 <x-app-layout>
 <body class="bg-gray-100">
-    <div class="container mx-auto p-4 flex justify-center items-center">
+    <div class="container mx-auto p-4 ml-4">
         <div>
             <img src="../{{$doctor->image}}" class="w-32 h-32 object-cover object-center rounded-full" alt="Doctor Image">
             <h2 class="text-2xl font-bold">{{ $doctor->name }}</h2>
