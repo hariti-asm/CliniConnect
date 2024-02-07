@@ -8,7 +8,71 @@
 </head>
 <x-app-layout>
 <body class="bg-gray-100">
-    <div class="container mx-auto p-4 ml-4">
+    
+
+  
+  <!-- Main modal -->
+  <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex items-center justify-center">
+    <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Book an appointment 
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="default-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5 space-y-4">
+                <h2 class="text-2xl font-bold">{{ $doctor->name }}</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full table-auto border-collapse border border-gray-200">
+                        <thead>
+                            <tr>
+                                <th class="border border-gray-200 px-2 py-1">Time</th>
+                                <th class="border border-gray-200 px-2 py-1">Book</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($sessions as $time)
+                                @if ($time->status === 'available')
+                                    <tr>
+                                        <td class="border border-gray-200 px-2 py-1">{{ $time->start_time }}</td>
+                                        <td class="border border-gray-200 px-2 py-1 flex justify-center">
+                                            <form action="{{ route('appointments.book', $time->id) }}" method="POST">
+                                                @csrf
+                                                <button class="bg-[#99BC85] hover:bg-[#99BC85] text-white px-3 py-1 rounded focus:outline-none">Book</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </tbody>
+                        
+                    </table>
+                </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                <button data-modal-hide="default-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
+                <button data-modal-hide="default-modal" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Decline</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+  
+    <div class="container mx-auto p-4 ml-5">
         <div>
             <img src="../{{$doctor->image}}" class="w-32 h-32 object-cover object-center rounded-full" alt="Doctor Image">
             <h2 class="text-2xl font-bold">{{ $doctor->name }}</h2>
@@ -42,15 +106,15 @@
                 @php $morningSessionCount = 0; @endphp
                 @foreach ($morning_sessions as $date => $sessions)
                     <div class="bg-white rounded-lg shadow-md p-4 mb-4">
-                        <div class="flex justify-between mb-2">
+                        <div class="flex justify-between mb-4">
                             <div class="text-xs text-gray-500">{{ \Carbon\Carbon::parse($date)->format('F Y') }}</div>
                             <div class="text-xs text-gray-500">{{ \Carbon\Carbon::parse($date)->format('l') }}</div>
                         </div>
-                        <div class="grid grid-cols-4 gap-2 mb-2">
+                        <div class="grid grid-cols-4 gap-2 mb-4">
                             @foreach ($sessions as $session)
                                 @if ($morningSessionCount < 10)
                                     @php 
-                                        $buttonClass = ($session->status == 'taken') ? 'bg-[#cdd125] cursor-not-allowed' : 'bg-gray-500 text-white';
+                                        $buttonClass = ($session->status == 'taken') ? 'bg-[#E1F0DA] cursor-not-allowed' : 'bg-[#474F7A] text-white';
                                         $disabled = ($session->status == 'taken') ? 'disabled' : '';
                                         $checked = ($session->status == 'taken') ? 'checked' : '';
                                         $statusText = ($session->status == 'taken') ? 'taken' : 'available';
@@ -65,14 +129,17 @@
                                 @endif
                             @endforeach
                         </div>
-                        <!-- Status Text -->
-                        <div class="text-center text-xs text-gray-500">
-                            <div class="flex items-center justify-center mb-2">
-                                <input type="checkbox" class="appearance-none border border-gray-300 w-4 h-4 rounded-sm checked:bg-[#cdd125] checked:border-transparent" checked disabled>
+                        <!-- Status Text and Button -->
+                        <div class="text-center text-xs text-gray-500 flex justify-between items-center">
+                            <div class="flex items-center justify-start mb-2">
+                                <input type="checkbox" class="appearance-none border border-gray-300 w-4 h-4 rounded-sm checked:bg-[#E1F0DA] checked:border-transparent" checked disabled>
                                 <span class="ml-1 mr-4">taken</span>
-                                <input type="checkbox" class="appearance-none border border-gray-300 w-4 h-4 rounded-sm checked:bg-gray-500 checked:border-transparent" checked disabled>
+                                <input type="checkbox" class="appearance-none border border-gray-300 w-4 h-4 rounded-sm checked:bg-[#474F7A] checked:border-transparent" checked disabled>
                                 <span>available</span>
                             </div>
+                            @if ($session->status == 'available')
+                                <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#99BC85] text-white px-1 py-1 rounded-md text-sm">Take Appointment</button>
+                            @endif
                         </div>
                     </div>
                     @if ($morningSessionCount >= 10)
@@ -87,15 +154,15 @@
                 @php $afternoonSessionCount = 0; @endphp
                 @foreach ($afternoon_sessions as $date => $sessions)
                     <div class="bg-white rounded-lg shadow-md p-4 mb-4">
-                        <div class="flex justify-between mb-2">
+                        <div class="flex justify-between mb-4">
                             <div class="text-xs text-gray-500">{{ \Carbon\Carbon::parse($date)->format('F Y') }}</div>
                             <div class="text-xs text-gray-500">{{ \Carbon\Carbon::parse($date)->format('l') }}</div>
                         </div>
-                        <div class="grid grid-cols-4 gap-2 mb-2">
+                        <div class="grid grid-cols-4 gap-2 mb-4">
                             @foreach ($sessions as $session)
                                 @if ($afternoonSessionCount < 10)
                                     @php 
-                                        $buttonClass = ($session->status == 'taken') ? 'bg-[#cdd125] cursor-not-allowed' : 'bg-gray-500 text-white';
+                                        $buttonClass = ($session->status == 'taken') ? 'bg-[#99BC85] cursor-not-allowed' : 'bg-[#474F7A] text-white';
                                         $disabled = ($session->status == 'taken') ? 'disabled' : '';
                                         $checked = ($session->status == 'taken') ? 'checked' : '';
                                         $statusText = ($session->status == 'taken') ? 'taken' : 'available';
@@ -110,14 +177,17 @@
                                 @endif
                             @endforeach
                         </div>
-                        <!-- Status Text -->
-                        <div class="text-center text-xs text-gray-500">
-                            <div class="flex items-center justify-center mb-2">
-                                <input type="checkbox" class="appearance-none border border-gray-300 w-4 h-4 rounded-sm checked:bg-[#cdd125] checked:border-transparent" checked disabled>
+                        <!-- Status Text and Button -->
+                        <div class="text-center text-xs text-gray-500 flex justify-between items-center">
+                            <div class="flex items-center justify-start mb-2">
+                                <input type="checkbox" class="appearance-none border border-gray-300 w-4 h-4 rounded-sm checked:bg-[#E1F0DA] checked:border-transparent" checked disabled>
                                 <span class="ml-1 mr-4">taken</span>
                                 <input type="checkbox" class="appearance-none border border-gray-300 w-4 h-4 rounded-sm checked:bg-gray-500 checked:border-transparent" checked disabled>
                                 <span>available</span>
                             </div>
+                            @if ($session->status == 'available')
+                                <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#99BC85] text-white px-1 py-1 rounded-md text-sm">Take Appointment</button>
+                            @endif
                         </div>
                     </div>
                     @if ($afternoonSessionCount >= 10)
@@ -128,6 +198,30 @@
         </div>
     </div>
     
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const modalToggles = document.querySelectorAll("[data-modal-toggle]");
+            const modalCloses = document.querySelectorAll("[data-modal-hide]");
+
+            modalToggles.forEach((toggle) => {
+                toggle.addEventListener("click", () => {
+                    const target = toggle.getAttribute("data-modal-target");
+                    const modal = document.getElementById(target);
+                    modal.classList.toggle("hidden");
+                    modal.setAttribute("aria-hidden", modal.classList.contains("hidden"));
+                });
+            });
+
+            modalCloses.forEach((close) => {
+                close.addEventListener("click", () => {
+                    const target = close.getAttribute("data-modal-hide");
+                    const modal = document.getElementById(target);
+                    modal.classList.add("hidden");
+                    modal.setAttribute("aria-hidden", modal.classList.contains("hidden"));
+                });
+            });
+        });
+    </script>
 </body>
 </x-app-layout>
 </html>

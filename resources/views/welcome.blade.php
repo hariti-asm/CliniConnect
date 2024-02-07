@@ -155,9 +155,9 @@
                   <h2 class="text-3xl font-bold mb-4">Our Doctors</h2>
                   <!-- Select option for specialities -->
                   <div class="mb-4">
-                      <label for="speciality" class="block text-sm font-medium text-gray-700">Select Speciality:</label>
-                      <select id="speciality" name="speciality" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
-                          <option value="" selected disabled>Select Speciality</option>
+                      {{-- <label for="speciality" class="block text-sm font-medium text-gray-700">Select Speciality:</label> --}}
+                      <select id="speciality" name="speciality" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#a5c422] focus:border-indigo-500">
+                          <option value="" selected disabled>All Specialties</option>
                           @foreach($specialities as $speciality)
                               <option value="{{ $speciality->id }}">{{ $speciality->name }}</option>
                           @endforeach

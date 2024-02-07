@@ -33,6 +33,20 @@ class DoctorController extends Controller
             }
         }
 
-        return view('doctor_detail', compact('morning_sessions', 'afternoon_sessions', 'doctor'));
+        return view('doctor_detail', compact('morning_sessions', 'afternoon_sessions', 'doctor','sessions'));
     }
+    public function book(Session $session)
+    {
+        // Check if the session is available
+        if ($session->status === 'available') {
+            // Update the status to "taken"
+            $session->update(['status' => 'taken']);
+    
+            // You can add any additional logic here, such as sending notifications, etc.
+    
+            return redirect()->back()->with('success', 'Appointment booked successfully.');
+        } else {
+            // Handle the case where the session is not available
+            return redirect()->back()->with('error', 'The appointment is no longer available.');
+        }}
 }
