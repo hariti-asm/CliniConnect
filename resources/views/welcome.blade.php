@@ -153,38 +153,45 @@
           <div class="container mx-auto">
               <div class="text-center">
                   <h2 class="text-3xl font-bold mb-4">Our Doctors</h2>
+                  <!-- Select option for specialities -->
+                  <div class="mb-4">
+                      <label for="speciality" class="block text-sm font-medium text-gray-700">Select Speciality:</label>
+                      <select id="speciality" name="speciality" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+                          <option value="" selected disabled>Select Speciality</option>
+                          @foreach($specialities as $speciality)
+                              <option value="{{ $speciality->id }}">{{ $speciality->name }}</option>
+                          @endforeach
+                      </select>
+                  </div>
               </div>
       
               <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                   @foreach($doctors as $doctor)
-                  <div class="rounded-lg overflow-hidden shadow-md bg-white">
-                      <img src="{{$doctor->image}}" class="w-32 h-32 object-cover object-center rounded-full" alt="Doctor Image">
-                      <div class="p-4">
-                          <h3 class="text-lg font-semibold mb-2">{{ $doctor->name }}</h3>
-                          <p>{{ $doctor->speciality->name }}</p>
-                                <div class="flex items-center justify-between">
-                              <!-- Stars -->
-                              <div class="flex items-center">
-                                  <i class="fa fa-star text-yellow-500"></i>
-                                  <i class="fa fa-star text-yellow-500"></i>
-                                  <i class="fa fa-star text-yellow-500"></i>
-                                  <i class="fa fa-star text-yellow-500"></i>
-                                  <i class="fa fa-star text-yellow-500"></i>
+                      <div class="rounded-lg overflow-hidden shadow-md bg-white">
+                          <img src="{{$doctor->image}}" class="w-32 h-32 object-cover object-center rounded-full" alt="Doctor Image">
+                          <div class="p-4">
+                              <h3 class="text-lg font-semibold mb-2">{{ $doctor->name }}</h3>
+                              <p>{{ $doctor->speciality->name }}</p>
+                              <div class="flex items-center justify-between">
+                                  <!-- Stars -->
+                                  <div class="flex items-center">
+                                      <i class="fa fa-star text-yellow-500"></i>
+                                      <i class="fa fa-star text-yellow-500"></i>
+                                      <i class="fa fa-star text-yellow-500"></i>
+                                      <i class="fa fa-star text-yellow-500"></i>
+                                      <i class="fa fa-star text-yellow-500"></i>
+                                  </div>
+                                  <a href="{{route('doctor_detail',['id'=>$doctor->id])}}" class="mt-4 inline-block bg-[#c3df4a] hover:bg-[#9ebb21] hover:text-white text-white font-bold py-2 px-4 rounded">See Details</a>
                               </div>
-
-                              <a href="{{route('doctor_detail',['id'=>$doctor->id])}}" class="mt-4 inline-block bg-[#c3df4a] hover:bg-[#9ebb21] hover:text-white text-white font-bold py-2 px-4 rounded">See Details</a>
                           </div>
                       </div>
-                  </div>
                   @endforeach
               </div>
-               <div class="mt-8 flex justify-center">
-                    {{ $doctors->links() }}
-               </div>
-               
+              <div class="mt-8 flex justify-center">
+                  {{ $doctors->links() }}
+              </div>
           </div>
       </section>
-      
       
       
       
