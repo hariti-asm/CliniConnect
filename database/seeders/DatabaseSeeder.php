@@ -13,44 +13,32 @@ class DatabaseSeeder extends Seeder
     {
         // Create 10 users using the factory
         \App\Models\User::factory(10)->create();
-
+    
         // Seed data for specialties
         Speciality::create(['name' => 'General Health']);
         Speciality::create(['name' => 'Cardiology']);
         Speciality::create(['name' => 'Dental']);
         Speciality::create(['name' => 'Medical Research']);
-
+    
         // Retrieve doctors
         $doctors = User::where('user_type', 2)->get();
-
+    
         // Define the time range for sessions
         $startMorning = Carbon::createFromTime(8, 0, 0);
         $endMorning = Carbon::createFromTime(13, 0, 0);
         $startAfternoon = Carbon::createFromTime(14, 0, 0);
         $endAfternoon = Carbon::createFromTime(17, 0, 0);
-
-        // Loop through each day (Monday to Friday)
-        $startDate = Carbon::now()->next(Carbon::MONDAY); 
-        for ($i = 0; $i < 5; $i++) { // Loop for 5 days (Monday to Friday)
-            $day = $startDate->copy()->addDays($i)->format('l'); // Get the day name (e.g., Monday)
-            
-            // Define session times based on whether it's morning or afternoon
-            if ($day === 'Saturday' || $day === 'Sunday') {
-                continue; // Skip sessions for weekends
-            }
-            if ($day === 'Friday') {
-                // Friday sessions end at 12:00 PM
-                $endMorning = Carbon::createFromTime(12, 0, 0);
-                $endAfternoon = Carbon::createFromTime(15, 0, 0);
-            }
-
-            // Insert morning sessions
-            $this->insertSessions($startMorning, $endMorning, $day, $doctors);
-
-            // Insert afternoon sessions
-            $this->insertSessions($startAfternoon, $endAfternoon, $day, $doctors);
-        }
+    
+        // Get the current day
+        $currentDay = Carbon::now()->format('l');
+    
+        // Insert morning sessions for today
+        $this->insertSessions($startMorning, $endMorning, $currentDay, $doctors);
+    
+        // Insert afternoon sessions for today
+        $this->insertSessions($startAfternoon, $endAfternoon, $currentDay, $doctors);
     }
+    
 
     private function insertSessions($startTime, $endTime, $day, $doctors)
     {

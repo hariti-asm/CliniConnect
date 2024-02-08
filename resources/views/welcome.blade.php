@@ -166,27 +166,30 @@
               </div>
       
               <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  @foreach($doctors as $doctor)
-                      <div class="rounded-lg overflow-hidden shadow-md bg-white">
-                          <img src="{{$doctor->image}}" class="w-32 h-32 object-cover object-center rounded-full" alt="Doctor Image">
-                          <div class="p-4">
-                              <h3 class="text-lg font-semibold mb-2">{{ $doctor->name }}</h3>
-                              <p>{{ $doctor->speciality->name }}</p>
-                              <div class="flex items-center justify-between">
-                                  <!-- Stars -->
-                                  <div class="flex items-center">
-                                      <i class="fa fa-star text-yellow-500"></i>
-                                      <i class="fa fa-star text-yellow-500"></i>
-                                      <i class="fa fa-star text-yellow-500"></i>
-                                      <i class="fa fa-star text-yellow-500"></i>
-                                      <i class="fa fa-star text-yellow-500"></i>
-                                  </div>
-                                  <a href="{{route('doctor_detail',['id'=>$doctor->id])}}" class="mt-4 inline-block bg-[#c3df4a] hover:bg-[#9ebb21] hover:text-white text-white font-bold py-2 px-4 rounded">See Details</a>
-                              </div>
-                          </div>
-                      </div>
-                  @endforeach
-              </div>
+               @foreach($doctors as $doctor)
+               <div class="rounded-lg overflow-hidden shadow-md bg-white">
+                   <img src="{{$doctor->image}}" class="w-32 h-32 object-cover object-center rounded-full" alt="Doctor Image">
+                   <div class="p-4">
+                       <h3 class="text-lg font-semibold mb-2">{{ $doctor->name }}</h3>
+                       <p>{{ $doctor->speciality->name }}</p>
+                       <div class="flex items-center justify-between">
+                           <!-- Stars -->
+                           <div class="flex items-center">
+                               @for ($i = 1; $i <= 5; $i++)
+                                   @if ($i <= $doctor->averageRating)
+                                       <i class="fa fa-star text-yellow-500"></i>
+                                   @else
+                                       <i class="fa fa-star text-gray-500"></i>
+                                   @endif
+                               @endfor
+                           </div>
+                           <a href="{{route('doctor_detail',['id'=>$doctor->id])}}" class="mt-4 inline-block bg-[#c3df4a] hover:bg-[#9ebb21] hover:text-white text-white font-bold py-2 px-4 rounded">See Details</a>
+                       </div>
+                   </div>
+               </div>
+               @endforeach
+           </div>
+           
               <div class="mt-8 flex justify-center">
                   {{ $doctors->links() }}
               </div>

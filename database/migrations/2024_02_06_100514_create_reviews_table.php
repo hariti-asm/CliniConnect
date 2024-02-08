@@ -15,7 +15,6 @@ return new class extends Migration
             $table->integer('rating');
             $table->text('comment')->nullable();
             $table->timestamps();
-
             $table->foreign('patient_id')->references('id')->on('users')->onDelete('cascade')->where('user_type', 1); 
             $table->foreign('doctor_id')->references('id')->on('users')->onDelete('cascade')->where('user_type', 2);
         });
