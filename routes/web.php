@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SpecialitiesController;
+use App\Http\Controllers\patientController;
 use App\Http\Controllers\DoctorController;
+
 use App\Http\Controllers\AppointmentController;
 
 use Illuminate\Support\Facades\Route;
@@ -19,16 +21,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [SpecialitiesController::class,'getSpecialities']);
-Route::get('/doctor_detail/{id}',[DoctorController::class,'doctor_detail'])->name('doctor_detail');
-Route::post('/appointments/{session}/book', [AppointmentController::class, 'book'])->name('appointments.book');
-Route::post('/reviews/{id}/store', [DoctorController::class, 'store'])->name('reviews.store');
+Route::get('/doctor_detail/{id}',[patientController::class,'doctor_detail'])->name('doctor_detail');
+Route::post('/appointments/{session}/book', [patientController::class, 'book'])->name('appointments.book');
+Route::post('/reviews/{id}/store', [patientController::class, 'store'])->name('reviews.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-Route::get('/doctors', function () {
-    return view('doctors');
-});
+Route::middleware('auth')->get('/doctors/{id}', [DoctorController::class, 'show'])->name('doctors.show');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

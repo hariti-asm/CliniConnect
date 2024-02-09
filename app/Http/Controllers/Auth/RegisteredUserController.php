@@ -51,6 +51,8 @@ class RegisteredUserController extends Controller
         if ($request->user_type == 1) {
             return redirect(RouteServiceProvider::HOME);
         } else {
-            return redirect('/doctors'); // Redirect to the doctor's page or any other appropriate route
-        }    }
+            return redirect()->route('doctors.show', ['id' => $user->id]);
+        }
+        
+}
 }
