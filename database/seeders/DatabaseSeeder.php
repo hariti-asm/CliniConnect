@@ -42,18 +42,14 @@ class DatabaseSeeder extends Seeder
 
     private function insertSessions($startTime, $endTime, $day, $doctors)
     {
-        // Start time for sessions
         $currentTime = $startTime;
 
         // Increment by 20 minutes until end time is reached
         while ($currentTime->lt($endTime)) {
             // Calculate end time for the session
             $endTimeSession = $currentTime->copy()->addMinutes(20);
-
-            // Randomly select a doctor
             $doctor = $doctors->random();
 
-            // Insert session into the database
             Session::create([
                 'doctor_id' => $doctor->id,
                 'date' => $day,
