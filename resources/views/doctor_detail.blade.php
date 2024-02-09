@@ -90,7 +90,15 @@
                     <path d="M5.11596 12.7268L8.15456 9.08666C8.46255 8.69067 8.61655 8.49267 8.69726 8.27061C8.76867 8.07411 8.79821 7.86486 8.784 7.65628C8.76793 7.42055 8.67477 7.18766 8.48846 6.72187L7.77776 4.94513C7.50204 4.25581 7.36417 3.91116 7.12635 3.68525C6.91678 3.48618 6.65417 3.3519 6.37009 3.29856C6.0477 3.23803 5.68758 3.32806 4.96733 3.50812L3 4.00002C3 14 9.99969 21 20 21L20.4916 19.0324C20.6717 18.3122 20.7617 17.952 20.7012 17.6297C20.6478 17.3456 20.5136 17.083 20.3145 16.8734C20.0886 16.6356 19.7439 16.4977 19.0546 16.222L17.4691 15.5878C16.9377 15.3752 16.672 15.2689 16.4071 15.2608C16.1729 15.2536 15.9404 15.3013 15.728 15.4002C15.4877 15.512 15.2854 15.7144 14.8807 16.1191L11.7943 19.1569" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
                 
-            
+        
+                <p class="text-sm text-gray-600">{{ $doctor->phone }}</p>
+            </div>
+            <div class="flex items-center mt-2">
+                <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 50 50" fill="#a5c422">
+                    <path d="M 25 4.0625 C 12.414063 4.0625 2.0625 12.925781 2.0625 24 C 2.0625 30.425781 5.625 36.09375 11 39.71875 C 10.992188 39.933594 11 40.265625 10.71875 41.3125 C 10.371094 42.605469 9.683594 44.4375 8.25 46.46875 L 7.21875 47.90625 L 9 47.9375 C 15.175781 47.964844 18.753906 43.90625 19.3125 43.25 C 21.136719 43.65625 23.035156 43.9375 25 43.9375 C 37.582031 43.9375 47.9375 35.074219 47.9375 24 C 47.9375 12.925781 37.582031 4.0625 25 4.0625 Z M 25 5.9375 C 36.714844 5.9375 46.0625 14.089844 46.0625 24 C 46.0625 33.910156 36.714844 42.0625 25 42.0625 C 22.996094 42.0625 21.050781 41.820313 19.21875 41.375 L 18.65625 41.25 L 18.28125 41.71875 C 18.28125 41.71875 15.390625 44.976563 10.78125 45.75 C 11.613281 44.257813 12.246094 42.871094 12.53125 41.8125 C 12.929688 40.332031 12.9375 39.3125 12.9375 39.3125 L 12.9375 38.8125 L 12.5 38.53125 C 7.273438 35.21875 3.9375 29.941406 3.9375 24 C 3.9375 14.089844 13.28125 5.9375 25 5.9375 Z"></path>
+                </svg>
+                
+                
                 <p class="text-sm text-gray-600">{{ $doctor->phone }}</p>
             </div>
         </div>
@@ -196,6 +204,107 @@
                 @endforeach
             </div>
         </div>
+        <div class="mt-8">
+            <!-- Button for adding a comment -->
+
+<!-- Comment modal -->
+<div id="comment-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex items-center justify-center">
+    <div class="relative p-4 w-full max-w-md max-h-full">
+        <!-- Modal content -->
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <!-- Modal header -->
+            <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Add a Comment
+                </h3>
+                <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="comment-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            <!-- Modal body -->
+            <div class="p-4 md:p-5 space-y-4">
+                <form action="{{ route('reviews.store', ['id' => $doctor->id]) }}" method="POST" class="space-y-4">
+                    @csrf
+                    <!-- Textarea for comments -->
+                    <textarea name="comment" class="w-full border rounded-md p-2" placeholder="Enter your comment..."></textarea>
+                    <!-- Star rating system -->
+                    <div class="flex items-center space-x-2">
+                        <input type="radio" id="star5" name="rating" value="5" class="sr-only">
+                        <label for="star5" title="5 stars">
+                            <svg class="star-icon w-6 h-6 text-gray-500 hover:text-yellow-500 transition-colors cursor-pointer active:text-yellow-500 active:stroke-current active:fill-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+                            </svg>
+                        </label>
+                        <!-- Add similar labels for other star ratings -->
+                        <input type="radio" id="star4" name="rating" value="4" class="sr-only">
+                        <label for="star4" title="4 stars">
+                            <svg class="star-icon w-6 h-6 text-gray-500 hover:text-yellow-500 transition-colors cursor-pointer active:text-yellow-500 active:stroke-current active:fill-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+                            </svg>
+                        </label>
+                  
+                        <input type="radio" id="star3" name="rating" value="3" class="sr-only">
+                        <label for="star3" title="3 stars">
+                            <svg class="star-icon w-6 h-6 text-gray-500 hover:text-yellow-500 transition-colors cursor-pointer active:text-yellow-500 active:stroke-current active:fill-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+                            </svg>
+                        </label>
+                        <input type="radio" id="star2" name="rating" value="2" class="sr-only">
+                        <label for="star2" title="2 stars">
+                            <svg class="star-icon w-6 h-6 text-gray-500 hover:text-yellow-500 transition-colors cursor-pointer active:text-yellow-500 active:stroke-current active:fill-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+                            </svg>
+                        </label>
+                        <input type="radio" id="star1" name="rating" value="1" class="sr-only">
+                        <label for="star1" title="1 stars">
+                            <svg class="star-icon w-6 h-6 text-gray-500 hover:text-yellow-500 transition-colors cursor-pointer active:text-yellow-500 active:stroke-current active:fill-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
+                            </svg>
+                        </label>
+                    </div>
+                    <div class="flex items-center p-4 md:p-5 border-t border-gray-200 rounded-b dark:border-gray-600">
+                        <button type="submit" class="text-white bg-[#474F7A] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-[#474F7A] dark:focus:ring-blue-800">Submit</button>
+                    </div>                
+                </form>
+            </div>
+            
+            
+          
+        </div>
+    </div>
+</div>
+<div class="flex justify-between">
+
+    <h3 class="text-xl font-semibold">Comments:</h3>
+    <button data-modal-target="comment-modal" data-modal-toggle="default-modal" class="bg-[#99BC85] text-white px-1 py-1 rounded-md text-sm mt-4 ml-5">Add a Comment</button>
+</div>
+
+            @if ($reviews->count() > 0)
+                @foreach ($reviews as $review)
+                    <div class="mt-4 border border-gray-200 rounded-lg p-4">
+                        <div class="flex items-center mb-2">
+                            {{-- <img src="{{ $review->patient->image }}" class="w-10 h-10 rounded-full mr-2" alt="Profile Picture"> --}}
+                            {{-- <div class="font-semibold">{{ $review->patient->name }}</div> --}}
+                            <div class="flex items-center ml-2">
+                                @for ($i = 0; $i < $review->rating; $i++)
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M10 2a.75.75 0 0 0-.75.75v6.992L5.28 8.864a.75.75 0 1 0-.53 1.428l3.47 2.624a.75.75 0 0 0 1.06-.648V2.75A.75.75 0 0 0 10 2zm6.22 6.28l-3.47-2.624a.75.75 0 1 0-.53 1.428L15.25 9.742v6.508a.75.75 0 0 0 1.06.648l3.47-2.624a.75.75 0 0 0 0-1.248z" clip-rule="evenodd"/>
+                                    </svg>
+                                @endfor
+                            </div>
+                        </div>
+                        <p class="text-gray-700">{{ $review->comment }}</p>
+                        <div class="text-xs text-gray-500 mt-2">{{ $review->created_at->diffForHumans() }}</div>
+                    </div>
+                @endforeach
+            @else
+                <p class="mt-4">No comments available.</p>
+            @endif
+        </div>
+        
     </div>
     
     <script>

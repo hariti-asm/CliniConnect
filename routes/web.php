@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [SpecialitiesController::class,'getSpecialities']);
 Route::get('/doctor_detail/{id}',[DoctorController::class,'doctor_detail'])->name('doctor_detail');
 Route::post('/appointments/{session}/book', [AppointmentController::class, 'book'])->name('appointments.book');
+Route::post('/reviews/{id}/store', [DoctorController::class, 'store'])->name('reviews.store');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

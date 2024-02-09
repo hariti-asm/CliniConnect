@@ -9,7 +9,7 @@ class Review extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'patient_id', 'doctor_id', 'rating', 'comment'
+        'patient_id', 'doctor_id', 'rating', 'comment',
     ];
 
     // Define relationship with Patient (User)
@@ -24,5 +24,6 @@ public function doctor()
 {
     return $this->belongsTo(User::class, 'doctor_id')->where('user_type', 2); // Specify 'doctor_id' as the foreign key
 }
+
 
 }
