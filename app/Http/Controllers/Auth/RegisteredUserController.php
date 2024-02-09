@@ -29,23 +29,28 @@ class RegisteredUserController extends Controller
      * @throws \Illuminate\Validation\ValidationException
      */
     public function store(Request $request): RedirectResponse
-    {
+    { 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'user_type' => ['required', 'integer'],
         ]);
-
+        
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'user_type' =>$request->user_type,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
-    }
+        if ($request->user_type == 1) {
+            return redirect(RouteServiceProvider::HOME);
+        } else {
+            return redirect('/doctors'); // Redirect to the doctor's page or any other appropriate route
+        }    }
 }
