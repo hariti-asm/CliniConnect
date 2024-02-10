@@ -1,13 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User;
 
+use App\Models\Certificate;
 use Illuminate\Http\Request;
-use App\Models\Session;
 
-use Illuminate\Support\Facades\Auth;
-class DoctorController extends Controller
+class CertificateController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,7 @@ class DoctorController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -26,6 +24,7 @@ class DoctorController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -42,38 +41,21 @@ class DoctorController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Certificate  $certificate
      * @return \Illuminate\Http\Response
      */
-
-
-
-public function show()
-{        
-    $doctor = Auth::user();
-    $sessions = Session::where('doctor_id', $doctor->id)->get();
-    $patients = Session::where('doctor_id', $doctor->id)
-                       ->whereNotNull('patient_id')
-                       ->with('patient')
-                       ->get();
-
-    if ($doctor->user_type !== 2) {
-        return redirect()->route('welcome');
+    public function show(Certificate $certificate)
+    {
+        //
     }
-
-    return view('doctors.show', compact('doctor', 'patients','sessions'));
-}
-
-     
-    
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Certificate  $certificate
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Certificate $certificate)
     {
         //
     }
@@ -82,10 +64,10 @@ public function show()
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Certificate  $certificate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Certificate $certificate)
     {
         //
     }
@@ -93,10 +75,10 @@ public function show()
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Certificate  $certificate
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Certificate $certificate)
     {
         //
     }

@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,108 +57,26 @@
            </ul>
         </div>
     </aside>   
-     {{-- <x-section></x-section> --}}
-<button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-    <span class="sr-only">Open sidebar</span>
-    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-    <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
-    </svg>
- </button>
- 
- 
-
- 
-    <div class="relative overflow-x-auto">
-        <table class="w-full max-w-7xl mt-10 mx-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                  
-                    <th scope="col" class="px-6 py-3">
-                        Patient Name
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Patient Email
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Date
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Start Time
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        End Time
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Medical Record
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Cert
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($sessions as $session)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                       
-                        <td class="px-6 py-4">
-                            @if ($session->patient)
-                                {{ $session->patient->name }}
-                            @else
-                                No patient assigned
-                            @endif
-                        </td>
-                        <td class="px-6 py-4">  {{ $session->patient->email }}</td>
-                        <td class="px-6 py-4">
-                            {{ $session->date }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $session->start_time }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $session->end_time }}
-                        </td>
-                        <td class="px-6 py-4">
-                            <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#99BC85] text-white px-1 py-1 rounded-md text-sm">View</button>
-
-                        </td>
-                        <td class="px-6 py-4">
-                            <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#99BC85] text-white px-1 py-1 rounded-md text-sm">View</button>
-
-                        </td>
-                      
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <div id="comment-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex items-center justify-center">
-            hello
+     {{-- <x-section></x-section> --}}@if ($reviews->count() > 0)
+@foreach ($reviews as $review)
+    <div class="mt-4 border border-gray-200 rounded-lg p-4">
+        <div class="flex items-center mb-2">
+            <img src="{{ $review->patient->image }}" class="w-10 h-10 rounded-full mr-2" alt="Profile Picture">
+            <div class="font-semibold">{{ $review->patient->name }}</div>
+            <div class="flex items-center ml-2">
+                @for ($i = 0; $i < $review->rating; $i++)
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M10 2a.75.75 0 0 0-.75.75v6.992L5.28 8.864a.75.75 0 1 0-.53 1.428l3.47 2.624a.75.75 0 0 0 1.06-.648V2.75A.75.75 0 0 0 10 2zm6.22 6.28l-3.47-2.624a.75.75 0 1 0-.53 1.428L15.25 9.742v6.508a.75.75 0 0 0 1.06.648l3.47-2.624a.75.75 0 0 0 0-1.248z" clip-rule="evenodd"/>
+                    </svg>
+                @endfor
+            </div>
         </div>
+        <p class="text-gray-700">{{ $review->comment }}</p>
+        <div class="text-xs text-gray-500 mt-2">{{ $review->created_at->diffForHumans() }}</div>
     </div>
-     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const modalToggles = document.querySelectorAll("[data-modal-toggle]");
-            const modalCloses = document.querySelectorAll("[data-modal-hide]");
-
-            modalToggles.forEach((toggle) => {
-                toggle.addEventListener("click", () => {
-                    const target = toggle.getAttribute("data-modal-target");
-                    const modal = document.getElementById(target);
-                    modal.classList.toggle("hidden");
-                    modal.setAttribute("aria-hidden", modal.classList.contains("hidden"));
-                });
-            });
-
-            modalCloses.forEach((close) => {
-                close.addEventListener("click", () => {
-                    const target = close.getAttribute("data-modal-hide");
-                    const modal = document.getElementById(target);
-                    modal.classList.add("hidden");
-                    modal.setAttribute("aria-hidden", modal.classList.contains("hidden"));
-                });
-            });
-        });
-    </script>
-    
-
+@endforeach
+@else
+<p class="mt-4">No comments available.</p>
+@endif
 </body>
 </html>

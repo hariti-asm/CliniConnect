@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../css/tooplate-style.css">
 
 </head>
-<body>
+<body >
     <aside id="logo-sidebar" class="fixed  top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
         <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
            <ul class="space-y-2 font-medium">
@@ -31,7 +31,7 @@
               </li>
               <li>
                  <a href="{{ route('patients.show', ['id' => $doctor->id]) }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                    <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                    <svg class="flex-shrink-0 w-5 h-5 text-gray-500  duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
                        <path d="m17.418 3.623-.018-.008a6.713 6.713 0 0 0-2.4-.569V2h1a1 1 0 1 0 0-2h-2a1 1 0 0 0-1 1v2H9.89A6.977 6.977 0 0 1 12 8v5h-2V8A5 5 0 1 0 0 8v6a1 1 0 0 0 1 1h8v4a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-4h6a1 1 0 0 0 1-1V8a5 5 0 0 0-2.582-4.377ZM6 12H4a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Z"/>
                     </svg>
                     <span class="flex-1 ms-3 whitespace-nowrap">Patients</span>
@@ -54,8 +54,7 @@
               </li>
            </ul>
         </div>
-    </aside>   
-     {{-- <x-section></x-section> --}}
+    </aside>  {{-- <x-section></x-section> --}}
 <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
     <span class="sr-only">Open sidebar</span>
     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -67,7 +66,7 @@
 
  
     <div class="relative overflow-x-auto">
-        <table class="w-full max-w-7xl mt-10 mx-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   
@@ -78,20 +77,9 @@
                         Patient Email
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Date
+                        ilness
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Start Time
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        End Time
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Medical Record
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Cert
-                    </th>
+                    
                 </tr>
             </thead>
             <tbody>
@@ -106,19 +94,8 @@
                             @endif
                         </td>
                         <td class="px-6 py-4">  {{ $session->patient->email }}</td>
-                        <td class="px-6 py-4">
-                            {{ $session->date }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $session->start_time }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $session->end_time }}
-                        </td>
-                        <td class="px-6 py-4">
-                            <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#99BC85] text-white px-1 py-1 rounded-md text-sm">View</button>
-
-                        </td>
+                        
+                        
                         <td class="px-6 py-4">
                             <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#99BC85] text-white px-1 py-1 rounded-md text-sm">View</button>
 

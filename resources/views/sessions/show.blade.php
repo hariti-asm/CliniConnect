@@ -1,3 +1,6 @@
+
+
+hiii
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +20,7 @@
     <link rel="stylesheet" href="../css/tooplate-style.css">
 
 </head>
-<body>
+<body >
     <aside id="logo-sidebar" class="fixed  top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
         <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
            <ul class="space-y-2 font-medium">
@@ -54,8 +57,7 @@
               </li>
            </ul>
         </div>
-    </aside>   
-     {{-- <x-section></x-section> --}}
+    </aside>  {{-- <x-section></x-section> --}}
 <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
     <span class="sr-only">Open sidebar</span>
     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -67,16 +69,11 @@
 
  
     <div class="relative overflow-x-auto">
-        <table class="w-full max-w-7xl mt-10 mx-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <table class="w-full max-w-7xl mt-10 mx-auto  text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   
-                    <th scope="col" class="px-6 py-3">
-                        Patient Name
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Patient Email
-                    </th>
+                    
                     <th scope="col" class="px-6 py-3">
                         Date
                     </th>
@@ -86,11 +83,9 @@
                     <th scope="col" class="px-6 py-3">
                         End Time
                     </th>
+                    
                     <th scope="col" class="px-6 py-3">
-                        Medical Record
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Cert
+                        detail
                     </th>
                 </tr>
             </thead>
@@ -99,15 +94,7 @@
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                        
                         <td class="px-6 py-4">
-                            @if ($session->patient)
-                                {{ $session->patient->name }}
-                            @else
-                                No patient assigned
-                            @endif
-                        </td>
-                        <td class="px-6 py-4">  {{ $session->patient->email }}</td>
-                        <td class="px-6 py-4">
-                            {{ $session->date }}
+                            {{ $session->created_at->format('m-d-Y') }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $session->start_time }}
@@ -115,15 +102,7 @@
                         <td class="px-6 py-4">
                             {{ $session->end_time }}
                         </td>
-                        <td class="px-6 py-4">
-                            <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#99BC85] text-white px-1 py-1 rounded-md text-sm">View</button>
-
-                        </td>
-                        <td class="px-6 py-4">
-                            <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#99BC85] text-white px-1 py-1 rounded-md text-sm">View</button>
-
-                        </td>
-                      
+                       
                     </tr>
                 @endforeach
             </tbody>

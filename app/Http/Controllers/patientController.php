@@ -2,6 +2,7 @@
 namespace App\Http\Controllers;
 use Carbon\Carbon;
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use App\Models\Review;
@@ -64,8 +65,7 @@ class patientController extends Controller
             $review->comment = $validatedData['comment'];
             $review->rating = $validatedData['rating'];
         
-            // You might want to associate the review with a user if applicable
-            // For example, if you have a User model and the reviews table has a user_id foreign key
+    
             $review->patient_id = auth()->user()->id;
         
         
@@ -78,5 +78,20 @@ class patientController extends Controller
             // Redirect back or return a response
             return redirect()->back()->with('success', 'Review submitted successfully!');
         }
-        
+ 
+public function show()
+{        
+    $doctor = Auth::user();
+    $sessions = Session::where('doctor_id', $doctor->id)->get();
+    $patients = Session::where('doctor_id', $doctor->id)
+                       ->whereNotNull('patient_id')
+                       ->with('patient')
+                       ->get();
+
+    if ($doctor->user_type !== 2) {
+        return redirect()->route('welcome');
+    }
+
+    return view('doctors.show', compact('doctor', 'patients','sessions'));
+}       
 }

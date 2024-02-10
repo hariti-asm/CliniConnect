@@ -1,13 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\User;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Session;
 
-use Illuminate\Support\Facades\Auth;
-class DoctorController extends Controller
+class SessionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +15,7 @@ class DoctorController extends Controller
      */
     public function index()
     {
-
+        //
     }
 
     /**
@@ -26,6 +25,7 @@ class DoctorController extends Controller
      */
     public function create()
     {
+        //
     }
 
     /**
@@ -46,26 +46,21 @@ class DoctorController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-
-
-public function show()
-{        
-    $doctor = Auth::user();
-    $sessions = Session::where('doctor_id', $doctor->id)->get();
-    $patients = Session::where('doctor_id', $doctor->id)
-                       ->whereNotNull('patient_id')
-                       ->with('patient')
-                       ->get();
-
-    if ($doctor->user_type !== 2) {
-        return redirect()->route('welcome');
-    }
-
-    return view('doctors.show', compact('doctor', 'patients','sessions'));
-}
-
+     public function show()
+     {        
+         $doctor = Auth::user();
+         $sessions = Session::where('doctor_id', $doctor->id)->get();
+         $patients = Session::where('doctor_id', $doctor->id)
+                            ->whereNotNull('patient_id')
+                            ->with('patient')
+                            ->get();
      
-    
+         if ($doctor->user_type !== 2) {
+             return redirect()->route('welcome');
+         }
+     
+         return view('sessions.show', compact('doctor','sessions'));
+     }
 
     /**
      * Show the form for editing the specified resource.

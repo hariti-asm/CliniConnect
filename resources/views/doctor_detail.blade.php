@@ -257,8 +257,8 @@
                 @foreach ($reviews as $review)
                     <div class="mt-4 border border-gray-200 rounded-lg p-4">
                         <div class="flex items-center mb-2">
-                            {{-- <img src="{{ $review->patient->image }}" class="w-10 h-10 rounded-full mr-2" alt="Profile Picture"> --}}
-                            {{-- <div class="font-semibold">{{ $review->patient->name }}</div> --}}
+                            <img src="{{ $review->patient->image }}" class="w-10 h-10 rounded-full mr-2" alt="Profile Picture">
+                            <div class="font-semibold">{{ $review->patient->name }}</div>
                             <div class="flex items-center ml-2">
                                 @for ($i = 0; $i < $review->rating; $i++)
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
@@ -278,30 +278,7 @@
         
     </div>
     
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const modalToggles = document.querySelectorAll("[data-modal-toggle]");
-            const modalCloses = document.querySelectorAll("[data-modal-hide]");
-
-            modalToggles.forEach((toggle) => {
-                toggle.addEventListener("click", () => {
-                    const target = toggle.getAttribute("data-modal-target");
-                    const modal = document.getElementById(target);
-                    modal.classList.toggle("hidden");
-                    modal.setAttribute("aria-hidden", modal.classList.contains("hidden"));
-                });
-            });
-
-            modalCloses.forEach((close) => {
-                close.addEventListener("click", () => {
-                    const target = close.getAttribute("data-modal-hide");
-                    const modal = document.getElementById(target);
-                    modal.classList.add("hidden");
-                    modal.setAttribute("aria-hidden", modal.classList.contains("hidden"));
-                });
-            });
-        });
-    </script>
+   <script src="../js/popup.js"></script>
 </body>
 </x-app-layout>
 </html>

@@ -1,0 +1,39 @@
+<section class="navbar navbar-default navbar-static-top " role="navigation">
+    <div class="container">
+
+         <div class="navbar-header">
+              <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                   <span class="icon icon-bar"></span>
+                   <span class="icon icon-bar"></span>
+                   <span class="icon icon-bar"></span>
+              </button>
+
+              <!-- lOGO TEXT HERE -->
+              <a href="index.html" class="navbar-brand"><i class="fa fa-h-square"></i>ealth Center</a>
+         </div>
+
+         <!-- MENU LINKS -->
+         <div class="collapse navbar-collapse">
+              {{-- <ul class="nav navbar-nav navbar-right">
+                   <li><a href="#top" class="smoothScroll">Home</a></li>
+                   <li><a href="#about" class="smoothScroll">About Us</a></li>
+                   <li><a href="#team" class="smoothScroll">Doctors</a></li>
+                   <li><a href="#news" class="smoothScroll">News</a></li>
+                   <li><a href="#google-map" class="smoothScroll">Contact</a></li>
+                   <li class="appointment-btn"><a href="#appointment">Make an appointment</a></li>
+              </ul> --}}
+              @if (Route::has('login'))
+              @auth
+                  <a href="{{ url('/dashboard') }}" class="text-5xl text-black dark:text-gray-500 underline">Dashboard</a>
+              @else
+                  <a href="{{ route('login') }}" class="text-sm text-black dark:text-gray-500 underline">Log in</a>
+
+                  @if (Route::has('register'))
+                      <a href="{{ route('register') }}" class="ml-4 text-sm text-blackdark:text-gray-500 underline">Register</a>
+                  @endif
+              @endauth
+      @endif 
+         </div>
+
+    </div>
+</section>
