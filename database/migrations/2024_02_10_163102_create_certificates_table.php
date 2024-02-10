@@ -12,10 +12,17 @@ return new class extends Migration
      * @return void
      */
     public function up()
-    {
+    {        schema::disableForeignKeyConstraints();
+
         Schema::create('certificates', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
+            $table->string('title'); 
+            $table->text('description')->nullable(); 
+            $table->date('date_received'); 
+            $table->string('issuer'); 
+            $table->date('expiration_date')->nullable(); // Date when the certificate expires (nullable)
+            $table->foreignId('patient_id')->nullable()->constrained('users')->where('user_type', 1);
+            $table->foreignId('doctor_id')->nullable()->constrained('users')->where('user_type', 2);
         });
     }
 
