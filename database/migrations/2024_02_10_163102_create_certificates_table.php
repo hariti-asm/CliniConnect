@@ -25,6 +25,8 @@ return new class extends Migration
             $table->foreignId('doctor_id')->nullable()->constrained('users')->where('user_type', 2);
             $table->foreignId('illness_id')->nullable()->constrained('illnesses');
             $table->string('satatus')->default('not approved');
+            $table->timestamps();
+
         });
     }
 

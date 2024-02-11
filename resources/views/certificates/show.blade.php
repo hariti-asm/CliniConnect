@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="../css/tooplate-style.css">
 
 </head>
-<body >
+<body>
     <aside id="logo-sidebar" class="fixed  top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
         <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
            <ul class="space-y-2 font-medium">
@@ -102,47 +102,70 @@
     </table>
     
     <!-- Modal -->
-    <div id="comment-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex items-center justify-center">
-        <div class="max-w-lg mx-auto mt-8 bg-white p-8 rounded-md shadow-md">
+    <div id="comment-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex items-center justify-center bg-gray-900 bg-opacity-50">
+        <div class="max-w-3xl mx-auto mt-8 bg-white p-8 rounded-md shadow-md">
             <h2 class="text-2xl font-bold mb-4">Fill Certificate Details</h2>
-            <form action="" method="POST">
+            <form action="{{ route('certificates.store') }}" method="POST">
                 @csrf
                 <div class="mb-4">
                     <label for="title" class="block text-sm font-semibold text-gray-700">Title:</label>
                     <input type="text" name="title" id="title" class="w-full border-gray-300 rounded-md mt-1 focus:border-indigo-500 focus:ring-indigo-500" required>
                 </div>
-                <!-- Other input fields -->
-    
-                <!-- Illness Selection -->
+                <div class="mb-4">
+                    <label for="description" class="block text-sm font-semibold text-gray-700">Description:</label>
+                    <textarea name="description" id="description" class="w-full border-gray-300 rounded-md mt-1 focus:border-indigo-500 focus:ring-indigo-500"></textarea>
+                </div>
+                <div class="mb-4">
+                    <label for="date_received" class="block text-sm font-semibold text-gray-700">Date Received:</label>
+                    <input type="date" name="date_received" id="date_received" class="w-full border-gray-300 rounded-md mt-1 focus:border-indigo-500 focus:ring-indigo-500" required>
+                </div>
+                <div class="mb-4">
+                    <label for="issuer" class="block text-sm font-semibold text-gray-700">Issuer:</label>
+                    <input type="text" name="issuer" id="issuer" class="w-full border-gray-300 rounded-md mt-1 focus:border-indigo-500 focus:ring-indigo-500" required>
+                </div>
+                <div class="mb-4">
+                    <label for="expiration_date" class="block text-sm font-semibold text-gray-700">Expiration Date:</label>
+                    <input type="date" name="expiration_date" id="expiration_date" class="w-full border-gray-300 rounded-md mt-1 focus:border-indigo-500 focus:ring-indigo-500">
+                </div>
+                <!-- Hidden input for doctor_id populated with logged-in doctor's ID -->
+                <input type="hidden" name="doctor_id" value="{{ auth()->user()->id }}">
+                <!-- Hidden input for patient_id -->
+                <input type="hidden" name="patient_id" id="patient_id">
                 <div class="mb-4">
                     <label for="illness_id" class="block text-sm font-semibold text-gray-700">Select Illness:</label>
                     <select name="illness_id" id="illness_id" class="w-full border-gray-300 rounded-md mt-1 focus:border-indigo-500 focus:ring-indigo-500" required>
                         <option value="">Select Illness</option>
                         @foreach($illnesses as $illness)
-                        <option value="{{ $illness->id }}">{{ $illness->name }}</option>
+                            <option value="{{ $illness->id }}">{{ $illness->name }}</option>
                         @endforeach
                     </select>
                 </div>
-    
-                <!-- Add New Illness -->
-                <div class="mb-4">
-                    <label for="new_illness" class="block text-sm font-semibold text-gray-700">Add New Illness:</label>
-                    <input type="text" name="new_illness" id="new_illness" class="w-full border-gray-300 rounded-md mt-1 focus:border-indigo-500 focus:ring-indigo-500">
-                    <p class="text-xs text-gray-500">If the illness is not in the list, you can add it here.</p>
-                </div>
-    
-                <!-- Hidden input for doctor_id populated with logged-in doctor's ID -->
-                <input type="hidden" name="doctor_id" value="{{ auth()->user()->id }}">
+                
                 <!-- Button for generating certificate -->
-                <button type="submit" class="w-full px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500 mb-2">Generate Certificate</button>
+                <button type="submit" class="w-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600 mb-2">Generate Certificate</button>
             </form>
         </div>
     </div>
     
     
+    
+    
+    
+    
+    
 </div>
 
 <script>
+     const illnessSelect = document.getElementById('illness_id');
+    const newIllnessSection = document.getElementById('new-illness-section');
+
+    illnessSelect.addEventListener('change', function() {
+        if (illnessSelect.value === '0') {
+            newIllnessSection.classList.remove('hidden');
+        } else {
+            newIllnessSection.classList.add('hidden');
+        }
+    });
     document.addEventListener("DOMContentLoaded", function () {
         const modalToggles = document.querySelectorAll("[data-modal-toggle]");
         const modalCloses = document.querySelectorAll("[data-modal-hide]");

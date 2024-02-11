@@ -39,7 +39,34 @@ class CertificateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the incoming request data
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'date_received' => 'required|date',
+            'issuer' => 'required|string|max:255',
+            'expiration_date' => 'nullable|date',
+            'patient_id' => 'nullable|exists:users,id',
+            'doctor_id' => 'nullable|exists:users,id',
+            'illness_id' => 'nullable|exists:illnesses,id',
+        ]);
+    
+        // Create a new Certificate instance with the validated data
+        $certificate = new Certificate();
+        $certificate->title = $validatedData['title'];
+        $certificate->description = $validatedData['description'];
+        $certificate->date_received = $validatedData['date_received'];
+        $certificate->issuer = $validatedData['issuer'];
+        $certificate->expiration_date = $validatedData['expiration_date'];
+        $certificate->patient_id = $validatedData['patient_id'];
+        $certificate->doctor_id = $validatedData['doctor_id'];
+        $certificate->illness_id = $validatedData['illness_id'];
+    
+        // Save the certificate
+        $certificate->save();
+    
+        // Redirect the user back or to a specific route
+        return redirect()->back()->with('success', 'Certificate created successfully.');
     }
 
     /**
