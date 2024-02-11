@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description');
+            $table->foreignId('speciality_id')->nullable()->constrained('specialities');
+
             $table->timestamps();
 
         });

@@ -89,9 +89,7 @@
                     <th scope="col" class="px-6 py-3">
                         Medical Record
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Cert
-                    </th>
+                  
                 </tr>
             </thead>
             <tbody>
@@ -119,10 +117,7 @@
                             <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#99BC85] text-white px-1 py-1 rounded-md text-sm">View</button>
 
                         </td>
-                        <td class="px-6 py-4">
-                            <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#99BC85] text-white px-1 py-1 rounded-md text-sm">View</button>
-
-                        </td>
+                       
                       
                     </tr>
                 @endforeach

@@ -20,9 +20,11 @@ return new class extends Migration
             $table->text('description')->nullable(); 
             $table->date('date_received'); 
             $table->string('issuer'); 
-            $table->date('expiration_date')->nullable(); // Date when the certificate expires (nullable)
+            $table->date('expiration_date')->nullable(); 
             $table->foreignId('patient_id')->nullable()->constrained('users')->where('user_type', 1);
             $table->foreignId('doctor_id')->nullable()->constrained('users')->where('user_type', 2);
+            $table->foreignId('illness_id')->nullable()->constrained('illnesses');
+            $table->string('satatus')->default('not approved');
         });
     }
 

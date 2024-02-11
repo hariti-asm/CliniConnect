@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\illness;
 class Certificate extends Model
 {
     use HasFactory;
@@ -16,7 +16,9 @@ class Certificate extends Model
         'issuer', // Entity that issued the certificate
         'expiration_date',
         'patient_id',
-        'doctor_id'
+        'doctor_id',
+        'ilness_id',
+        'status'
     ];
     public function patient()
     {
@@ -26,5 +28,9 @@ class Certificate extends Model
     public function doctor()
     {
         return $this->belongsTo(User::class, 'doctor_id')->where('user_type', 2); // Filter doctors
+    }
+    public function illeness()
+    {
+        return $this->belongsTo(illness::class, 'id'); 
     }
 }

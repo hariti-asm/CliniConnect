@@ -30,8 +30,9 @@ Route::get('/doctor_detail/{id}',[patientController::class,'doctor_detail'])->na
 Route::post('/appointments/{session}/book', [patientController::class, 'book'])->name('appointments.book');
 Route::post('/reviews/{id}/store', [patientController::class, 'store'])->name('reviews.store');
 Route::get('/feedback/{id}', [FeedbackController::class, 'show'])->name('feedback.show');
-Route::get('/certificates/{id}', [CertificateController::class, 'show'])->name('certificates.show');
 Route::get('/patients/{id}', [PatientController::class, 'show'])->name('patients.show');
+Route::get('/certificates/{id}', [CertificateController::class, 'show'])->name('certificates.show');
+
 Route::get('/sessions/{id}', [SessionController::class, 'show'])->name('sessions.show');
 
 Route::get('/dashboard', function () {

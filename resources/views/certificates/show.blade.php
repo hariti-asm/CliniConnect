@@ -1,6 +1,4 @@
 
-
-hiii
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,9 +39,7 @@ hiii
                  </a>
               </li>
               <li>
-                 <a href="{{ route('certificates.show',['id'=>$
-                 
-                 ->id]) }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                 <a href="{{ route('certificates.show',['id'=>$doctor->id]) }}" class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                     <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 18">
                        <path d="M14 2a3.963 3.963 0 0 0-1.4.267 6.439 6.439 0 0 1-1.331 6.638A4 4 0 1 0 14 2Zm1 9h-1.264A6.957 6.957 0 0 1 15 15v2a2.97 2.97 0 0 1-.184 1H19a1 1 0 0 0 1-1v-1a5.006 5.006 0 0 0-5-5ZM6.5 9a4.5 4.5 0 1 0 0-9 4.5 4.5 0 0 0 0 9ZM8 10H5a5.006 5.006 0 0 0-5 5v2a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-2a5.006 5.006 0 0 0-5-5Z"/>
                     </svg>
@@ -59,7 +55,8 @@ hiii
               </li>
            </ul>
         </div>
-    </aside>  {{-- <x-section></x-section> --}}
+    </aside> 
+     {{-- <x-section></x-section> --}}
 <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
     <span class="sr-only">Open sidebar</span>
     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -70,71 +67,105 @@ hiii
  
 
  
-    <div class="relative overflow-x-auto">
-        <table class="w-full max-w-7xl mt-10 mx-auto  text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                <tr>
-                  
-                    
-                    <th scope="col" class="px-6 py-3">
-                        Date
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Start Time
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        End Time
-                    </th>
-                    
-                    
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($sessions as $session)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                       
-                        <td class="px-6 py-4">
-                            {{ $session->created_at->format('m-d-Y') }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $session->start_time }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $session->end_time }}
-                        </td>
-                       
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-        <div id="comment-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex items-center justify-center">
-            hello
+ <div class="relative overflow-x-auto">
+    <table class="w-full max-w-7xl mx-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="px-6 py-3">
+                    Patient Name
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Genarate certificate
+                </th>
+                <th scope="col" class="px-6 py-3">
+                    Actions
+                </th>
+            </tr>
+        </thead>        <tbody>
+            @foreach ($patients as $patient)
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <td class="px-6 py-4">
+                    {{ $patient->name }}
+                </td>
+                <td class="px-6 py-4">
+                    <!-- Button to view certificates -->
+                    <button data-modal-target="comment-modal" data-modal-toggle="comment-modal" class="bg-[#99BC85] text-white px-2 py-1 rounded-md text-sm">Generate</button>
+                </td>
+                <td class="px-6 py-4">
+                    <!-- Other action buttons -->
+                    <button class="bg-[#99BC85] text-white px-2 py-1 rounded-md text-sm">Edit</button>
+                    <button class="bg-[#99BC85] text-white px-2 py-1 rounded-md text-sm">View</button>
+                </td>
+            </tr>
+            @endforeach
+        </tbody>
+    </table>
+    
+    <!-- Modal -->
+    <div id="comment-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex items-center justify-center">
+        <div class="max-w-lg mx-auto mt-8 bg-white p-8 rounded-md shadow-md">
+            <h2 class="text-2xl font-bold mb-4">Fill Certificate Details</h2>
+            <form action="" method="POST">
+                @csrf
+                <div class="mb-4">
+                    <label for="title" class="block text-sm font-semibold text-gray-700">Title:</label>
+                    <input type="text" name="title" id="title" class="w-full border-gray-300 rounded-md mt-1 focus:border-indigo-500 focus:ring-indigo-500" required>
+                </div>
+                <!-- Other input fields -->
+    
+                <!-- Illness Selection -->
+                <div class="mb-4">
+                    <label for="illness_id" class="block text-sm font-semibold text-gray-700">Select Illness:</label>
+                    <select name="illness_id" id="illness_id" class="w-full border-gray-300 rounded-md mt-1 focus:border-indigo-500 focus:ring-indigo-500" required>
+                        <option value="">Select Illness</option>
+                        @foreach($illnesses as $illness)
+                        <option value="{{ $illness->id }}">{{ $illness->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+    
+                <!-- Add New Illness -->
+                <div class="mb-4">
+                    <label for="new_illness" class="block text-sm font-semibold text-gray-700">Add New Illness:</label>
+                    <input type="text" name="new_illness" id="new_illness" class="w-full border-gray-300 rounded-md mt-1 focus:border-indigo-500 focus:ring-indigo-500">
+                    <p class="text-xs text-gray-500">If the illness is not in the list, you can add it here.</p>
+                </div>
+    
+                <!-- Hidden input for doctor_id populated with logged-in doctor's ID -->
+                <input type="hidden" name="doctor_id" value="{{ auth()->user()->id }}">
+                <!-- Button for generating certificate -->
+                <button type="submit" class="w-full px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-500 focus:outline-none focus:bg-indigo-500 mb-2">Generate Certificate</button>
+            </form>
         </div>
     </div>
-     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const modalToggles = document.querySelectorAll("[data-modal-toggle]");
-            const modalCloses = document.querySelectorAll("[data-modal-hide]");
+    
+    
+</div>
 
-            modalToggles.forEach((toggle) => {
-                toggle.addEventListener("click", () => {
-                    const target = toggle.getAttribute("data-modal-target");
-                    const modal = document.getElementById(target);
-                    modal.classList.toggle("hidden");
-                    modal.setAttribute("aria-hidden", modal.classList.contains("hidden"));
-                });
-            });
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const modalToggles = document.querySelectorAll("[data-modal-toggle]");
+        const modalCloses = document.querySelectorAll("[data-modal-hide]");
 
-            modalCloses.forEach((close) => {
-                close.addEventListener("click", () => {
-                    const target = close.getAttribute("data-modal-hide");
-                    const modal = document.getElementById(target);
-                    modal.classList.add("hidden");
-                    modal.setAttribute("aria-hidden", modal.classList.contains("hidden"));
-                });
+        modalToggles.forEach((toggle) => {
+            toggle.addEventListener("click", () => {
+                const target = toggle.getAttribute("data-modal-target");
+                const modal = document.getElementById(target);
+                modal.classList.toggle("hidden");
+                modal.setAttribute("aria-hidden", modal.classList.contains("hidden"));
             });
         });
-    </script>
+
+        modalCloses.forEach((close) => {
+            close.addEventListener("click", () => {
+                const target = close.getAttribute("data-modal-hide");
+                const modal = document.getElementById(target);
+                modal.classList.add("hidden");
+                modal.setAttribute("aria-hidden", modal.classList.contains("hidden"));
+            });
+        });
+    });
+</script>
     
 
 </body>

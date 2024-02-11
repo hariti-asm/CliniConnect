@@ -55,4 +55,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Review::class,'doctor_id');
     }
+    public function certificates()
+    {
+        return $this->hasMany(Certificate::class,'doctor_id');
+    }
+    public function patients()
+{
+    return $this->hasMany(User::class, 'id');
+}
+
 }

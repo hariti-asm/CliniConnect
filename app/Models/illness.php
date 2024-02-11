@@ -10,6 +10,10 @@ class illness extends Model
     use HasFactory;
     use HasFactory;
     protected $fillable = [
-        'name', 'description'
+        'name', 'description','speciality_id'
     ];
+    public function speciality()
+    {
+        return $this->belongsTo(Speciality::class);
+    }
 }
