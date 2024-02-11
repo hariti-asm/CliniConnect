@@ -1,15 +1,17 @@
 <?php
 
+use App\Models\Medication;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DoctorController;
+
 use App\Http\Controllers\patientController;
 
 use App\Http\Controllers\ProfileController;
-
-use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\SessionController;
 
+use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\SpecialitiesController;
@@ -32,6 +34,11 @@ Route::post('/reviews/{id}/store', [patientController::class, 'store'])->name('r
 Route::get('/feedback/{id}', [FeedbackController::class, 'show'])->name('feedback.show');
 Route::get('/patients/{id}', [PatientController::class, 'show'])->name('patients.show');
 Route::get('/certificates/{id}', [CertificateController::class, 'show'])->name('certificates.show');
+Route::get('/medications', [MedicationController::class, 'index'])->name('medications.index');
+Route::put('/medications/{medication}', [MedicationController::class, 'update'])->name('medications.update');
+Route::delete('/medications/{medication}',[MedicationController::class, 'destroy'])->name('medications.destroy');
+Route::post('/medications', [MedicationController::class, 'store'])->name('medications.store');
+
 Route::post('/certificates', [CertificateController::class, 'store'])->name('certificates.store');
 
 Route::get('/sessions/{id}', [SessionController::class, 'show'])->name('sessions.show');
