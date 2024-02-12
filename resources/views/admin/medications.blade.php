@@ -217,6 +217,15 @@
                 modal.setAttribute("aria-hidden", modal.classList.contains("hidden"));
             });
         });
+        const editIcons = document.querySelectorAll('[data-toggle="modal"]');
+        editIcons.forEach((icon) => {
+            icon.addEventListener("click", () => {
+                const targetModalId = icon.getAttribute("data-target");
+                const modal = document.getElementById(targetModalId);
+                modal.classList.remove("hidden");
+                modal.setAttribute("aria-hidden", modal.classList.contains("hidden"));
+            });
+        });
     });
    
         const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
