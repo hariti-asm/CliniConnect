@@ -15,6 +15,7 @@ use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\SpecialitiesController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,6 +43,7 @@ Route::post('/medications', [MedicationController::class, 'store'])->name('medic
 Route::post('/certificates', [CertificateController::class, 'store'])->name('certificates.store');
 
 Route::get('/sessions/{id}', [SessionController::class, 'show'])->name('sessions.show');
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

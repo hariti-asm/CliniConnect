@@ -70,8 +70,8 @@
 @foreach ($reviews as $review)
     <div class="mt-4 border border-gray-200 rounded-lg p-4">
         <div class="flex items-center mb-2">
-            <img src="{{ $review->patient->image }}" class="w-10 h-10 rounded-full mr-2" alt="Profile Picture">
-            <div class="font-semibold">{{ $review->patient->name }}</div>
+            {{-- <img src="{{ $review->patient->image }}" class="w-10 h-10 rounded-full mr-2" alt="Profile Picture"> --}}
+            {{-- <div class="font-semibold">{{ $review->patient->name }}</div> --}}
             <div class="flex items-center ml-2">
                 @for ($i = 0; $i < $review->rating; $i++)
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">

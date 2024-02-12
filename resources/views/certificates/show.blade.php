@@ -136,7 +136,7 @@
                 <!-- Hidden input for doctor_id populated with logged-in doctor's ID -->
                 <input type="hidden" name="doctor_id" value="{{ auth()->user()->id }}">
                 <!-- Hidden input for patient_id -->
-                <input type="hidden" name="patient_id" id="patient_id" value="{{$patient->id}}">
+                <input type="hidden" name="patient_id" id="patient_id" value="">
                 <div class="mb-4">
                     <label for="illness_id" class="block text-sm font-semibold text-gray-700">Select Illness:</label>
                     <select name="illness_id" id="illness_id" class="w-full border-gray-300 rounded-md mt-1 focus:border-indigo-500 focus:ring-indigo-500" required>
