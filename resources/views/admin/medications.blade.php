@@ -136,10 +136,8 @@
                                 </td>
                                 <td>{{ $medication->created_at->format('d-m-Y') }}</td>
                                 <td>
-                                    <!-- Edit icon -->
                                     <a href="#" data-toggle="modal" data-target="#editMedicineModal{{ $medication->id }}"><i class='bx bx-edit'></i></a>
-                                    <!-- Update icon -->
-                                    <!-- Update form -->
+                                   
                                     <form id="updateMedicineForm{{ $medication->id }}" action="{{ route('medications.update', $medication->id) }}" method="POST" style="display: none;">
                                         @csrf
                                         @method('PUT')
@@ -166,24 +164,26 @@
                 <div id="addMedicineModal" class="modal fade" tabindex="-1" aria-labelledby="addMedicineModalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header flex justify-between">
                                 <h5 class="modal-title" id="addMedicineModalLabel">Add New Medicine</h5>
-                                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">X</button>
                             </div>
                             <div class="modal-body">
-                                <form id="addMedicineForm" action="{{ route('admin.store') }}" method="POST">
+                                <form id="addMedicineForm" class="flex flex-col gap-4" action="{{ route('admin.store') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
                                         <label for="medicine_name">Medicine Name:</label>
-                                        <input type="text" class="form-control" id="medicine_name" name="medicine_name" required>
+                                        <input type="text" class="form-control border border-[#DBE7C9]  px-2 py-2 rounded-xl focus:outline-none" id="medicine_name" name="medicine_name" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="medicine_description">Medicine desc:</label>
-                                        <input type="text" class="form-control" id="medicine_description" name="medicine_description" required>
-                                    </div>                                    <button type="submit" class="btn btn-primary">Add Medicine</button>
+                                        <input type="text" class="form-control border  border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="medicine_description" name="medicine_description" required>
+                                    </div>
+                                    <button type="submit" class="bg-[#99BC85] font-semibold text-white text-md px-3 py-1 rounded-full w-full max-w-sm">Add Medicine</button>
                                 </form>
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>

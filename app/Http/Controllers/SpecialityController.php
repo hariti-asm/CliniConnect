@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Speciality;
-use App\Models\Illness; // Assuming you have an Illness model
+use App\Models\Illness; 
+use App\Models\User; // Assuming you have an Illness model
+
 
 use Illuminate\Support\Facades\Auth;
 
@@ -15,6 +17,13 @@ class SpecialityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function getSpecialities(){
+        $specialities = Speciality::all();
+        $doctors = User::where('user_type', 2)->paginate(6);
+        return view('welcome', compact('specialities', 'doctors'));
+    }
+    
     public function index()
     {    
         $doctor = Auth::user();
