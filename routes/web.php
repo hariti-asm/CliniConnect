@@ -14,7 +14,7 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\MedicationController;
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\CertificateController;
-use App\Http\Controllers\SpecialitiesController;
+use App\Http\Controllers\SpecialityController;
 use App\Http\Controllers\AdminController;
 
 /*
@@ -28,7 +28,7 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/', [SpecialitiesController::class,'getSpecialities']);
+Route::get('/', [SpecialityController::class,'getSpecialities']);
 Route::get('/doctor_detail/{id}',[patientController::class,'doctor_detail'])->name('doctor_detail');
 Route::post('/appointments/{session}/book', [patientController::class, 'book'])->name('appointments.book');
 Route::post('/reviews/{id}/store', [patientController::class, 'store'])->name('reviews.store');
@@ -39,11 +39,29 @@ Route::get('/medications', [MedicationController::class, 'index'])->name('medica
 Route::put('/medications/{medication}', [MedicationController::class, 'update'])->name('medications.update');
 Route::delete('/medications/{medication}',[MedicationController::class, 'destroy'])->name('medications.destroy');
 Route::post('/medications', [MedicationController::class, 'store'])->name('medications.store');
-
 Route::post('/certificates', [CertificateController::class, 'store'])->name('certificates.store');
-
 Route::get('/sessions/{id}', [SessionController::class, 'show'])->name('sessions.show');
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+Route::get('/admin/patients', [AdminController::class, 'getPatients'])->name('admin.patients');
+Route::get('/admin/medications', [AdminController::class, 'getMedications'])->name('admin.medications');
+
+
+
+Route::get('/medications', [AdminController::class, 'index'])->name('medications.index');
+Route::put('/medications/{medicine}', [AdminController::class, 'update'])->name('admin.update');
+Route::delete('/medications/{medicine}', [AdminController::class, 'destroy'])->name('admin.destroy');
+Route::post('/medications', [AdminController::class, 'store'])->name('admin.store');
+
+
+Route::get('/specialties/create', [SpecialityController::class, 'create'])->name('specialities.create');
+
+Route::post('/specialties', [SpecialityController::class, 'store'])->name('specialities.store');
+
+Route::get('/specialties/{specialty}/edit', [SpecialityController::class, 'edit'])->name('specialities.edit');
+
+Route::put('/specialties/{specialty}', [SpecialityController::class, 'update'])->name('specialities.update');
+
+Route::delete('/specialties/{specialty}', [SpecialityController::class, 'destroy'])->name('specialities.destroy');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -3,11 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 	<!-- Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 	<link rel="stylesheet" href="../css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 
 	<title>AdminHub</title>
 </head>
@@ -22,15 +25,15 @@
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
-				<a href="#">
+				<a href="{{route('admin.index')}}">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{route('admin.patients')}}">
 					<i class='bx bxs-shopping-bag-alt' ></i>
-					<span class="text">My Store</span>
+					<span class="text">Patients</span>
 				</a>
 			</li>
 			<li>
@@ -100,28 +103,20 @@
 			<div class="head-title">
 				<div class="left">
 					<h1>Dashboard</h1>
-					<ul class="breadcrumb">
-						<li>
-							<a href="#">Dashboard</a>
-						</li>
-						<li><i class='bx bx-chevron-right' ></i></li>
-						<li>
-							<a class="active" href="#">Home</a>
-						</li>
-					</ul>
+					
 				</div>
 				<a href="#" class="btn-download">
 					<i class='bx bxs-cloud-download' ></i>
 					<span class="text">Download PDF</span>
 				</a>
 			</div>
-
+{{-- 
 			<ul class="box-info">
 				<li>
 					<i class='bx bxs-calendar-check' ></i>
 					<span class="text">
 						<h3><?php echo $specialitiesNumber?></h3>
-						<p>Specialties</p>
+						<p>specialities</p>
 					</span>
 				</li>
 				<li>
@@ -138,105 +133,78 @@
 						<p>Doctors</p>
 					</span>
 				</li>
-			</ul>
+			</ul> --}}
+
+<div class="table-data">
+    <div class="order">
+        <div class="head">
+            <h3>Recent Patients</h3>
+            <i class='bx bx-search'></i>
+            <i class='bx bx-filter'></i>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>User</th>
+                    <th>Date Order</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($patients as $patient)
+                <tr>
+                    <td>
+                        <img src="../{{ $patient->image }}">
+                        <p>{{ $patient->name }}</p>
+                    </td>
+                    <td>{{ $patient->created_at->format('d-m-Y') }}</td>
+                    <td>
+                        <span class="bg-[#A2C579] text-white rounded-full px-2 py-1">
+                            {{ $patient->status }}
+                        </span>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
 
-			<div class="table-data">
-				<div class="order">
-					<div class="head">
-						<h3>Recent Orders</h3>
-						<i class='bx bx-search' ></i>
-						<i class='bx bx-filter' ></i>
-					</div>
-					<table>
-						<thead>
-							<tr>
-								<th>User</th>
-								<th>Date Order</th>
-								<th>Status</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status process">Process</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status pending">Pending</span></td>
-							</tr>
-							<tr>
-								<td>
-									<img src="img/people.png">
-									<p>John Doe</p>
-								</td>
-								<td>01-10-2021</td>
-								<td><span class="status completed">Completed</span></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div class="todo">
-					<div class="head">
-						<h3>Todos</h3>
-						<i class='bx bx-plus' ></i>
-						<i class='bx bx-filter' ></i>
-					</div>
-					<ul class="todo-list">
-						<li class="completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="not-completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-						<li class="not-completed">
-							<p>Todo List</p>
-							<i class='bx bx-dots-vertical-rounded' ></i>
-						</li>
-					</ul>
-				</div>
-			</div>
+
+	
+{{-- edit --}}
+	
+</div>
+
+
 		</main>
-		<!-- MAIN -->
 	</section>
-	<!-- CONTENT -->
 	
 
-	<script >
+	<script>
+	 document.addEventListener("DOMContentLoaded", function () {
+        const modalToggles = document.querySelectorAll("[data-modal-toggle]");
+        const modalCloses = document.querySelectorAll("[data-modal-hide]");
+
+        modalToggles.forEach((toggle) => {
+            toggle.addEventListener("click", () => {
+                const target = toggle.getAttribute("data-modal-target");
+                const modal = document.getElementById(target);
+                modal.classList.toggle("hidden");
+                modal.setAttribute("aria-hidden", modal.classList.contains("hidden"));
+            });
+        });
+
+        modalCloses.forEach((close) => {
+            close.addEventListener("click", () => {
+                const target = close.getAttribute("data-modal-hide");
+                const modal = document.getElementById(target);
+                modal.classList.add("hidden");
+                modal.setAttribute("aria-hidden", modal.classList.contains("hidden"));
+            });
+        });
+    });
+   
 		const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
 
 allSideMenu.forEach(item=> {
