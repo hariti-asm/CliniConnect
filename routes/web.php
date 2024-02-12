@@ -61,7 +61,7 @@ Route::get('/specialties/{specialty}/edit', [SpecialityController::class, 'edit'
 
 Route::put('/specialties/{specialty}', [SpecialityController::class, 'update'])->name('specialities.update');
 
-Route::delete('/specialties/{specialty}', [SpecialityController::class, 'destroy'])->name('specialities.destroy');
+Route::delete('/admin/{specialty}', [SpecialityController::class, 'destroy'])->name('specialities.destroy');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

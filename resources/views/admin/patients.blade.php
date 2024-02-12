@@ -37,9 +37,9 @@
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{route("admin.medications")}}">
 					<i class='bx bxs-doughnut-chart' ></i>
-					<span class="text">Analytics</span>
+					<span class="text">Medications</span>
 				</a>
 			</li>
 			<li>
@@ -93,7 +93,7 @@
 				<span class="num">8</span>
 			</a>
 			<a href="#" class="profile">
-				<img src="img/people.png">
+				<img src="../{{$doctor->image }}">
 			</a>
 		</nav>
 		<!-- NAVBAR -->
@@ -102,7 +102,6 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Dashboard</h1>
 					
 				</div>
 				<a href="#" class="btn-download">
@@ -110,30 +109,7 @@
 					<span class="text">Download PDF</span>
 				</a>
 			</div>
-{{-- 
-			<ul class="box-info">
-				<li>
-					<i class='bx bxs-calendar-check' ></i>
-					<span class="text">
-						<h3><?php echo $specialitiesNumber?></h3>
-						<p>specialities</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-group' ></i>
-					<span class="text">
-						<h3><?php echo $patientsNumber?></h3>
-						<p>Patientss</p>
-					</span>
-				</li>
-				<li>
-					<i class='bx bxs-dollar-circle' ></i>
-					<span class="text">
-						<h3><?php echo $doctorsNumber?></h3>
-						<p>Doctors</p>
-					</span>
-				</li>
-			</ul> --}}
+
 
 <div class="table-data">
     <div class="order">
@@ -159,7 +135,7 @@
                     </td>
                     <td>{{ $patient->created_at->format('d-m-Y') }}</td>
                     <td>
-                        <span class="bg-[#A2C579] text-white rounded-full px-2 py-1">
+                        <span class="bg-[#D3CEDF] text-white rounded-full px-2 py-1">
                             {{ $patient->status }}
                         </span>
                     </td>

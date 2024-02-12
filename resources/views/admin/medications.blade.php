@@ -26,8 +26,8 @@
         <ul class="side-menu top">
             <li class="active">
                 <a href="{{route('admin.index')}}">
-                    <i class='bx bxs-dashboard' ></i>
-                    <span class="text">Dashboard</span>
+                    <i class='bx bxs-dashboard text-[#0D9276]' ></i>
+                    <span class="text-[#0D9276]">Dashboard</span>
                 </a>
             </li>
             <li>
@@ -83,7 +83,7 @@
             <form action="#">
                 <div class="form-input">
                     <input type="search" placeholder="Search...">
-                    <button type="submit" class="search-btn"><i class='bx bx-search' ></i></button>
+                    <button type="submit" class="search-btn bg-[#0D9276]"><i class=' bx bx-search' ></i></button>
                 </div>
             </form>
             <input type="checkbox" id="switch-mode" hidden>
@@ -93,7 +93,7 @@
                 <span class="num">8</span>
             </a>
             <a href="#" class="profile">
-                <img src="img/people.png">
+				<img src="../{{$doctor->image }}">
             </a>
         </nav>
         <!-- NAVBAR -->
@@ -105,8 +105,8 @@
                     <h1>Dashboard</h1>
                     
                 </div>
-                <button data-toggle="modal" data-target="#addMedicineModal" type="button" class="btn-download">
-                    <span class="text">Add New Medicine</span>
+                <button data-toggle="modal" data-target="#addMedicineModal" type="button" class=" bg-[#0D9276] rounded-full px-2 py-1 ">
+                    <span class="text-white text-semibold">Add New Medicine</span>
                 </button>
                
             </div>
@@ -132,16 +132,17 @@
                             @foreach($medications as $medication)
                             <tr>
                                 <td>
-                                    <p>{{ $medication->name }}</p>
+                                    <p class="text-gray-500 text-sm">{{ $medication->name }}</p>
                                 </td>
-                                <td>{{ $medication->created_at->format('d-m-Y') }}</td>
+                                <td>
+                                    
+                                    <p class="text-gray-500 text-sm">{{ $medication->created_at->format('d-m-Y') }}</p></td>
                                 <td>
                                     <a href="#" data-toggle="modal" data-target="#editMedicineModal{{ $medication->id }}"><i class='bx bx-edit'></i></a>
                                    
                                     <form id="updateMedicineForm{{ $medication->id }}" action="{{ route('medications.update', $medication->id) }}" method="POST" style="display: none;">
                                         @csrf
                                         @method('PUT')
-                                        <!-- Additional fields for updating medicine -->
                                     </form>
                                     <!-- Courbeille icon for delete -->
                                     <a href="#" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this medicine?')) document.getElementById('deleteMedicineForm{{ $medication->id }}').submit();"><i class='bx bxs-trash'></i></a>

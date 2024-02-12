@@ -103,13 +103,10 @@ class SpecialityController extends Controller
         // Validate the incoming request data
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
-            // Add any additional validation rules as needed
         ]);
 
-        // Update the Speciality with the validated data
         $Speciality->update($validatedData);
 
-        // Redirect back to the specialties index page with a success message
         return redirect()->route('admin.index')->with('success', 'Speciality updated successfully.');
     }
 
@@ -128,6 +125,6 @@ class SpecialityController extends Controller
         $Speciality->delete();
 
         // Redirect back to the specialties index page with a success message
-        return redirect()->route('specialties.index')->with('success', 'Speciality deleted successfully.');
+        return redirect()->route('admin.index')->with('success', 'Speciality deleted successfully.');
     }
 }

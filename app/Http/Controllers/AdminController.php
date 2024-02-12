@@ -16,7 +16,8 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {      
+
         $patients=User::all()->where('user_type',1);
         $specialities=Speciality::all();
         $specialitiesNumber=Speciality::count();
@@ -42,9 +43,10 @@ class AdminController extends Controller
 
     }
     public function getMedications(){
+        $doctor = Auth::user();
 
         $medications=Medication::all();
-        return view('admin.medications',['medications'=>$medications]);
+        return view('admin.medications',compact('medications','doctor'));
     }
     /**
      * Show the form for creating a new resource.
@@ -121,6 +123,6 @@ class AdminController extends Controller
     {
         $medication->delete();
     
-        return redirect()->route('/admin.medications')->with('success', 'Medication deleted successfully');
+        return redirect()->route('admin/medications')->with('success', 'Medication deleted successfully');
     }
 }
