@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\illness;
 use App\Models\Medication;
+use App\Models\Review;
 use App\Models\User;
 use App\Models\Speciality;
 use Illuminate\Http\Request;
@@ -46,7 +48,8 @@ class AdminController extends Controller
         $doctor = Auth::user();
 
         $medications=Medication::all();
-        return view('admin.medications',compact('medications','doctor'));
+        $illnesses=illness::all();
+        return view('admin.medications',compact('medications','doctor','illnesses'));
     }
     /**
      * Show the form for creating a new resource.
@@ -54,8 +57,11 @@ class AdminController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
-        //
+     {              $doctor = Auth::user();
+
+           $reviews=Review::all();
+        return view('admin.messages',compact('reviews','doctor'));
+
     }
 
     /**
@@ -69,12 +75,14 @@ class AdminController extends Controller
         $validatedData = $request->validate([
             'medicine_name' => 'required|string|max:255',
             'medicine_description' => 'required|string|max:255',
-           
+           'illeness_id'=>'required|integer'
         ]);
 
         $medicine = new Medication();
         $medicine->name = $validatedData['medicine_name'];
         $medicine->description = $validatedData['medicine_description'];
+        $medicine->illness_id = $validatedData['illeness_id'];
+
         $medicine->save();
         return redirect()->back()->with('success', 'Medicine added successfully!');
     }

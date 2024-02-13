@@ -16,7 +16,6 @@ class patientController extends Controller
         $sessions = Session::where('doctor_id', $id)->get();
         $doctor = User::where('user_type', 2)->where('id', $id)->first();
     
-        // Fetch reviews for the doctor
         $reviews = $doctor->reviews;
         $morning_sessions = [];
         $afternoon_sessions = [];

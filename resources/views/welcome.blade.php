@@ -54,14 +54,14 @@
 
                <!-- MENU LINKS -->
                <div class="collapse navbar-collapse">
-                    {{-- <ul class="nav navbar-nav navbar-right">
-                         <li><a href="#top" class="smoothScroll">Home</a></li>
+                    <ul class="nav navbar-nav navbar-right">
+                         <li><a href="#top" class="text-black text-xl">Home</a></li>
                          <li><a href="#about" class="smoothScroll">About Us</a></li>
                          <li><a href="#team" class="smoothScroll">Doctors</a></li>
                          <li><a href="#news" class="smoothScroll">News</a></li>
                          <li><a href="#google-map" class="smoothScroll">Contact</a></li>
                          <li class="appointment-btn"><a href="#appointment">Make an appointment</a></li>
-                    </ul> --}}
+                    </ul>
                     @if (Route::has('login'))
                     @auth
                         <a href="{{ url('/dashboard') }}" class="text-5xl text-black dark:text-gray-500 underline">Dashboard</a>

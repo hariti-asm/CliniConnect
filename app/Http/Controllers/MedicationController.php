@@ -109,10 +109,8 @@ class MedicationController extends Controller
             'dosage' => 'nullable|string|max:255',
         ]);
     
-        // Update the medication with the validated data
         $medication->update($validatedData);
     
-        // Redirect back to the medications index page with a success message
         return redirect()->route('medications.index')->with('success', 'Medication updated successfully');
     }
 

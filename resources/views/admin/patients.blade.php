@@ -43,9 +43,9 @@
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{route('reviews.create')}}">
 					<i class='bx bxs-message-dots' ></i>
-					<span class="text">Message</span>
+					<span class="text">Messages</span>
 				</a>
 			</li>
 			<li>

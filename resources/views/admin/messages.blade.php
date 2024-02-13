@@ -100,101 +100,55 @@
 
         <!-- MAIN -->
         <main>
-            <div class="head-title">
-                <div class="left">
-                    
-                </div>
-                <button data-toggle="modal" data-target="#addMedicineModal" type="button" class=" bg-[#0D9276] rounded-full px-2 py-1 ">
-                    <span class="text-white text-semibold">Add New Medicine</span>
-                </button>
-               
-            </div>
-         
-            <div class="table-data">
-                <div class="order">
-                    <div class="head">
-                        <h3>Recent Medicines</h3>
-                        <i class='bx bx-search'></i>
-                        <i class='bx bx-filter'></i>
-                    </div>
-                  
-                
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Date Order</th>
-                                <th>Action</th> <!-- New column for actions -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($medications as $medication)
-                            <tr>
-                                <td>
-                                    <p class="text-gray-500 text-sm">{{ $medication->name }}</p>
-                                </td>
-                                <td>
-                                    
-                                    <p class="text-gray-500 text-sm">{{ $medication->created_at->format('d-m-Y') }}</p></td>
-                                <td>
-                                    <a href="#" data-toggle="modal" data-target="#editMedicineModal{{ $medication->id }}"><i class='bx bx-edit'></i></a>
-                                   
-                                    <form id="updateMedicineForm{{ $medication->id }}" action="{{ route('medications.update', $medication->id) }}" method="POST" style="display: none;">
-                                        @csrf
-                                        @method('PUT')
-                                    </form>
-                                    <!-- Courbeille icon for delete -->
-                                    <a href="#" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this medicine?')) document.getElementById('deleteMedicineForm{{ $medication->id }}').submit();"><i class='bx bxs-trash'></i></a>
-                                    <!-- Delete form -->
-                                    <form id="deleteMedicineForm{{ $medication->id }}" action="{{ route('medications.destroy', $medication->id) }}" method="POST" style="display: none;">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
-                                </td>
-                            </tr>
-                            <!-- Edit medicine Modal -->
-                            <div id="editMedicineModal{{ $medication->id }}" class="modal fade" tabindex="-1" aria-labelledby="editMedicineModalLabel{{ $medication->id }}" aria-hidden="true" style="display: none;">
-                                <!-- Modal content for editing medicine -->
-                            </div>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-               
-                <div id="addMedicineModal" class="modal fade" tabindex="-1" aria-labelledby="addMedicineModalLabel" aria-hidden="true" style="display: none;">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header flex justify-between">
-                                <h5 class="modal-title" id="addMedicineModalLabel">Add New Medicine</h5>
-                                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">X</button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="addMedicineForm" class="flex flex-col gap-4" action="{{ route('admin.store') }}" method="POST">
-                                    @csrf
-                                    <div class="form-group">
-                                        <label for="medicine_name">Medicine Name:</label>
-                                        <input type="text" class="form-control border border-[#DBE7C9]  px-2 py-2 rounded-xl focus:outline-none" id="medicine_name" name="medicine_name" required>
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="medicine_description">Medicine desc:</label>
-                                        <input type="text" class="form-control border  border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="medicine_description" name="medicine_description" required>
-                                    </div>
-                                    <select name="illness_id" id="illness_id">
-                                        @foreach ($illnesses as $ill )
-                                            <option value="{{ $ill->id }}">{{$ill->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    <button type="submit" class="bg-[#99BC85] font-semibold text-white text-md px-3 py-1 rounded-full w-full max-w-sm">Add Medicine</button>
-                                </form>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
-            
-            
+       <!-- Blade Template -->
+<!-- Blade Template -->
+<div class="grid grid-cols-2 gap-4">
+    @foreach($reviews as $index => $review)
+    @if($index % 2 == 0)
+    <div class="border border-gray-300 rounded-md p-4 mb-4">
+        <div class="flex gap-4">
+            <img src="../{{$review->patient->image }}" class="rounded-full w-10 h-10">
+            <h5 class=" text-md"> {{ $review->patient->name }}</h5>
+        </div>
 
+        <h6 class="italic text-gray-600">Doctor: {{ $review->doctor->name }}</h6>
+        <p class="text-gray-800 mt-2">{{ $review->comment }}</p>
+        <div class="flex mt-2">
+            @for($i = 1; $i <= 5; $i++)
+                @if($i <= $review->rating)
+                    <span class="text-yellow-500">&#9733;</span> <!-- Yellow star -->
+                @else
+                    <span class="text-gray-300">&#9733;</span> <!-- Gray star -->
+                @endif
+            @endfor
+        </div>
+    </div>
+    @else
+    <div class="border border-gray-300 rounded-md p-4 mb-4">
+        <div class="flex gap-4">
+            <img src="../{{$review->patient->image }}" class="rounded-full w-10 h-10">
+            <h5 class=" text-md"> {{ $review->patient->name }}</h5>
+        </div>
+        <h6 class="italic text-gray-600">Doctor: {{ $review->doctor->name }}</h6>
+   
+        <p class="text-gray-800 mt-2">{{ $review->comment }}</p>
+        <div class="flex mt-2">
+            @for($i = 1; $i <= 5; $i++)
+                @if($i <= $review->rating)
+                    <span class="text-yellow-500">&#9733;</span> <!-- Yellow star -->
+                @else
+                    <span class="text-gray-300">&#9733;</span> <!-- Gray star -->
+                @endif
+            @endfor
+        </div>
+    </div>
+    @endif
+    @endforeach
+</div>
+
+
+
+        
 
         </main>
     </section>

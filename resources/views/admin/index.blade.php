@@ -43,7 +43,7 @@
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="{{route('reviews.create')}}">
 					<i class='bx bxs-message-dots' ></i>
 					<span class="text">Message</span>
 				</a>
@@ -96,28 +96,10 @@
 				<img src="{{ $doctor->image }}">
 			</a>
 		</nav>
-		<!-- NAVBAR -->
-
-		<!-- MAIN -->
+	
 		<main>
-			<div class="head-title">
-				<div class="left">
-					<h1>Dashboard</h1>
-					<ul class="breadcrumb">
-						<li>
-							<a href="#">Dashboard</a>
-						</li>
-						<li><i class='bx bx-chevron-right' ></i></li>
-						<li>
-							<a class="active" href="#">Home</a>
-						</li>
-					</ul>
-				</div>
-				<a href="#" class="btn-download">
-					<i class='bx bxs-cloud-download' ></i>
-					<span class="text">Download PDF</span>
-				</a>
-			</div>
+			
+			
 
 			<ul class="box-info">
 				<li>
@@ -146,7 +128,7 @@
 <div class="table-data">
     <div class="order">
         <div class="head">
-            <h3>Recent Doctors</h3>
+            <h4>Recent Doctors</h4>
             <i class='bx bx-search'></i>
             <i class='bx bx-filter'></i>
         </div>
@@ -162,9 +144,9 @@
                 <tr>
                     <td>
                         <img src="../{{ $patient->image }}">
-                        <p>{{ $patient->name }}</p>
+                        <p class="text-md">{{ $patient->name }}</p>
                     </td>
-                    <td>{{ $patient->created_at->format('d-m-Y') }}</td>
+                    <td class="text-md">{{ $patient->created_at->format('d-m-Y') }}</td>
                    
                 </tr>
                 @endforeach
@@ -173,7 +155,7 @@
     </div>
 	<div class="todo">
 		<div class="head">
-			<h3>specialities</h3>
+			<h4>specialities</h4>
 			<a href="#" data-toggle="modal" data-target="#addspecialityModal"><i class='bx bx-plus'></i></a>
 			<i class='bx bx-filter'></i>
 		</div>
