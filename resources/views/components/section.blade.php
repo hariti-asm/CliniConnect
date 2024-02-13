@@ -45,10 +45,16 @@
              </a>
          </li>
          <li>
-             <a href="#" class="logout">
-                 <i class='bx bxs-log-out-circle' ></i>
-                 <span class="text">Logout</span>
-             </a>
+          <form id="logoutForm" method="POST" action="{{ route('logout') }}">
+               @csrf
+           </form>
+           
+           <a href="#" class="logout" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
+               <i class='bx bxs-log-out-circle'></i>
+               <span class="text">Logout</span>
+           </a>
+           
+           
          </li>
      </ul>
  </section>
