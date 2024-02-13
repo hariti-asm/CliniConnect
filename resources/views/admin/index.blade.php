@@ -63,10 +63,16 @@
 				</a>
 			</li>
 			<li>
-				<a href="#" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
+				<form id="logoutForm" method="POST" action="{{ route('logout') }}">
+					@csrf
+				</form>
+				
+				<a href="#" class="logout" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">
+					<i class='bx bxs-log-out-circle'></i>
 					<span class="text">Logout</span>
 				</a>
+				
+				
 			</li>
 		</ul>
 	</section>
@@ -79,7 +85,7 @@
 		<!-- NAVBAR -->
 		<nav>
 			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link">Categories</a>
+			<a href="#" class="nav-link">Specialties</a>
 			<form action="#">
 				<div class="form-input">
 					<input type="search" placeholder="Search...">

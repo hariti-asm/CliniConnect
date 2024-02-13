@@ -114,15 +114,15 @@
 <div class="table-data">
     <div class="order">
         <div class="head">
-            <h3>Recent Patients</h3>
+            <h4 class="font-semibold text-xl">Recent Patients</h4>
             <i class='bx bx-search'></i>
             <i class='bx bx-filter'></i>
         </div>
         <table>
             <thead>
                 <tr>
-                    <th>User</th>
-                    <th>Date Order</th>
+                    <th>Patient</th>
+                    <th>Logging date</th>
                     <th>Status</th>
                 </tr>
             </thead>
@@ -131,11 +131,16 @@
                 <tr>
                     <td>
                         <img src="../{{ $patient->image }}">
-                        <p>{{ $patient->name }}</p>
+                        <p class="text-sm">{{ $patient->name }}</p>
                     </td>
-                    <td>{{ $patient->created_at->format('d-m-Y') }}</td>
                     <td>
-                        <span class="bg-[#D3CEDF] text-white rounded-full px-2 py-1">
+						<p class="text-sm" >
+
+							{{ $patient->created_at->format('d-m-Y') }}
+						</p>
+					</td>
+                    <td>
+                        <span class="bg-[#D3CEDF] text-white text-xs rounded-full px-2 py-1">
                             {{ $patient->status }}
                         </span>
                     </td>

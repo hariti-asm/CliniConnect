@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <title>AdminHub</title>
+    <title>HealthCare</title>
 </head>
 <body>
 
@@ -21,7 +21,7 @@
     <section id="sidebar">
         <a href="#" class="brand">
             <i class='bx bxs-smile'></i>
-            <span class="text">AdminHub</span>
+            <span class="text">HealthCare</span>
         </a>
         <ul class="side-menu top">
             <li class="active">
@@ -113,7 +113,7 @@
             <div class="table-data">
                 <div class="order">
                     <div class="head">
-                        <h3>Recent Medicines</h3>
+                        <h4 class="font-semibold text-xl">Recent Medecines</h4>
                         <i class='bx bx-search'></i>
                         <i class='bx bx-filter'></i>
                     </div>
@@ -184,7 +184,7 @@
                                             <option value="{{ $ill->id }}">{{$ill->name}}</option>
                                         @endforeach
                                     </select>
-                                    <button type="submit" class="bg-[#99BC85] font-semibold text-white text-md px-3 py-1 rounded-full w-full max-w-sm">Add Medicine</button>
+                                    <button type="submit" class="bg-[#5B9A8B] font-semibold text-white text-md px-3 py-1 rounded-full w-full max-w-sm">Add Medicine</button>
                                 </form>
                             </div>
                         </div>
