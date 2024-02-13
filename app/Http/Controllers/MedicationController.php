@@ -19,14 +19,14 @@ class MedicationController extends Controller
     {    $doctor = Auth::user();
 
         $doctorSpecialtyId = auth()->user()->speciality_id;
-    $illnesses=illness::where('speciality_id',$doctorSpecialtyId );
+       $illnesses=illness::where('speciality_id',$doctorSpecialtyId );
         if ($doctorSpecialtyId) {
             $medications = Medication::whereHas('illness', function ($query) use ($doctorSpecialtyId) {
                 $query->whereNotNull('speciality_id')
                       ->where('speciality_id', $doctorSpecialtyId);
             })->get();
     
-            return view('medications.index', compact('medications','illnesses'));
+            return view('medications.index', compact('medications','illnesses','doctor'));
         } else {
            echo"something goes wrong";
         }

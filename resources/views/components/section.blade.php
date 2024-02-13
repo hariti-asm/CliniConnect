@@ -1,39 +1,54 @@
-<section class="navbar navbar-default navbar-static-top " role="navigation">
-    <div class="container">
 
-         <div class="navbar-header">
-              <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                   <span class="icon icon-bar"></span>
-                   <span class="icon icon-bar"></span>
-                   <span class="icon icon-bar"></span>
-              </button>
-
-              <!-- lOGO TEXT HERE -->
-              <a href="index.html" class="navbar-brand"><i class="fa fa-h-square"></i>ealth Center</a>
-         </div>
-
-         <!-- MENU LINKS -->
-         <div class="collapse navbar-collapse">
-              <ul class="nav navbar-nav navbar-right">
-                   <li><a href="#top" class="smoothScroll">Home</a></li>
-                   <li><a href="#about" class="smoothScroll">About Us</a></li>
-                   <li><a href="#team" class="smoothScroll">Doctors</a></li>
-                   <li><a href="#news" class="smoothScroll">News</a></li>
-                   <li><a href="#google-map" class="smoothScroll">Contact</a></li>
-                   <li class="appointment-btn"><a href="#appointment">Make an appointment</a></li>
-              </ul>
-              @if (Route::has('login'))
-              @auth
-                  <a href="{{ url('/dashboard') }}" class="text-5xl text-black dark:text-gray-500 underline">Dashboard</a>
-              @else
-                  <a href="{{ route('login') }}" class="text-sm text-black dark:text-gray-500 underline">Log in</a>
-
-                  @if (Route::has('register'))
-                      <a href="{{ route('register') }}" class="ml-4 text-sm text-blackdark:text-gray-500 underline">Register</a>
-                  @endif
-              @endauth
-      @endif 
-         </div>
-
-    </div>
-</section>
+@props(['doctor'])
+<section id="sidebar">
+     <a href="#" class="brand">
+         <i class='bx bxs-smile'></i>
+         <span class="text">HealthCare</span>
+     </a>
+     <ul class="side-menu top">
+         <li class="active">
+             <a href="{{ route('sessions.show', ['id' => $doctor->id]) }}">
+                 <i class='bx bxs-dashboard text-[#0D9276]' ></i>
+                 <span class="text-[#0D9276]">Sessions</span>
+             </a>
+         </li>
+         <li>
+             <a href="{{ route('patients.show', ['id' => $doctor->id]) }}">
+                 <i class='bx bxs-shopping-bag-alt' ></i>
+                 <span class="text">Patients</span>
+             </a>
+         </li>
+         <li>
+             <a  href="{{ route('medications.index')}}" >
+                 <i class='bx bxs-doughnut-chart' ></i>
+                 <span class="text">Medications</span>
+             </a>
+         </li>
+         <li>
+                 <a href="{{ route('certificates.show',['id'=>$doctor->id]) }}">
+                 <i class='bx bxs-message-dots' ></i>
+                 <span class="text">Certificates</span>
+             </a>
+         </li>
+         <li>
+             <a href="{{ route('feedback.show', ['id' => $doctor->id]) }}">
+                 <i class='bx bxs-group' ></i>
+                 <span class="text">Feedback</span>
+             </a>
+         </li>
+     </ul>
+     <ul class="side-menu">
+         <li>
+             <a href="#">
+                 <i class='bx bxs-cog' ></i>
+                 <span class="text">Settings</span>
+             </a>
+         </li>
+         <li>
+             <a href="#" class="logout">
+                 <i class='bx bxs-log-out-circle' ></i>
+                 <span class="text">Logout</span>
+             </a>
+         </li>
+     </ul>
+ </section>

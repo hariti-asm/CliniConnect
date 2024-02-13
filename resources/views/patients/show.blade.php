@@ -97,7 +97,7 @@
                         
                         
                         <td class="px-6 py-4">
-                            <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#99BC85] text-white px-1 py-1 rounded-md text-sm">View</button>
+                            <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#0D9276] text-white px-3 py-2 rounded-md text-sm">View</button>
 
                         </td>
                       
