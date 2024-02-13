@@ -88,7 +88,7 @@ public function show()
                        ->get();
 
     if ($doctor->user_type !== 2) {
-        return redirect()->route('welcome');
+        return redirect()->route('admin.index');
     }
 
     return view('doctors.show', compact('doctor', 'patients','sessions'));

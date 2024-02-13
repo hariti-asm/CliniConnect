@@ -28,7 +28,9 @@ use App\Http\Controllers\AdminController;
 |
 */
 
-Route::get('/', [SpecialityController::class,'getSpecialities']);
+Route::get('/', [SpecialityController::class, 'getSpecialities'])->name('filter_doctors');
+// Route::get('/', [SpecialityController::class,'filterDoctors']);
+
 Route::get('/doctor_detail/{id}',[patientController::class,'doctor_detail'])->name('doctor_detail');
 Route::post('/appointments/{session}/book', [patientController::class, 'book'])->name('appointments.book');
 Route::post('/reviews/{id}/store', [patientController::class, 'store'])->name('reviews.store');

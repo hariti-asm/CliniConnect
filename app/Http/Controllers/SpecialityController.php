@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Speciality;
 use App\Models\Illness; 
-use App\Models\User; // Assuming you have an Illness model
+use App\Models\User; 
+
+use Illuminate\Support\Facades\DB;
+
 
 
 use Illuminate\Support\Facades\Auth;
@@ -18,11 +21,50 @@ class SpecialityController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     public function getSpecialities(){
-        $specialities = Speciality::all();
-        $doctors = User::where('user_type', 2)->paginate(6);
-        return view('welcome', compact('specialities', 'doctors'));
-    }
+  
+     public function getSpecialities(Request $request)
+     {
+         $specialities = Speciality::all();
+         $specialityId = $request->input('speciality');
+     
+         if ($specialityId) {
+             $doctors = User::where('user_type', 2)
+                             ->whereHas('speciality', function ($query) use ($specialityId) {
+                                 $query->where('id', $specialityId);
+                             })
+                             ->with(['reviews' => function ($query) {
+                                 $query->select('doctor_id', DB::raw('avg(rating) as average_rating'))
+                                       ->groupBy('doctor_id');
+                             }])
+                             ->paginate(6);
+     
+             // Calculate average rating for each doctor
+             foreach ($doctors as $doctor) {
+                 $doctor->averageRating = $doctor->reviews->first()->average_rating ?? 0;
+             }
+         } else {
+             $doctors = User::where('user_type', 2)
+                            ->with(['reviews' => function ($query) {
+                                 $query->select('doctor_id', DB::raw('avg(rating) as average_rating'))
+                                       ->groupBy('doctor_id');
+                             }])
+                            ->paginate(6);
+     
+             // Calculate average rating for each doctor
+             foreach ($doctors as $doctor) {
+                 $doctor->averageRating = $doctor->reviews->first()->average_rating ?? 0;
+             }
+         }
+     
+         return view('welcome', compact('specialities', 'doctors'));
+     }
+     
+    
+    
+
+
+
+
     
     public function index()
     {    
@@ -49,8 +91,7 @@ class SpecialityController extends Controller
      */
     public function create()
     {
-        // Display the form for creating a new Speciality (if needed)
-        // return view('specialties.create');
+       
     }
 
     /**
@@ -118,13 +159,10 @@ class SpecialityController extends Controller
      */
     public function destroy($id)
     {
-        // Retrieve the Speciality to be deleted
         $Speciality = Speciality::findOrFail($id);
 
-        // Delete the Speciality
         $Speciality->delete();
 
-        // Redirect back to the specialties index page with a success message
         return redirect()->route('admin.index')->with('success', 'Speciality deleted successfully.');
     }
 }
