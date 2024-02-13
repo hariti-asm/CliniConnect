@@ -21,7 +21,7 @@
 	<section id="sidebar">
 		<a href="#" class="brand">
 			<i class='bx bxs-smile'></i>
-			<span class="text">AdminHub</span>
+			<span class="text">HealthCare</span>
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
@@ -144,9 +144,9 @@
                 <tr>
                     <td>
                         <img src="../{{ $patient->image }}">
-                        <p class="text-md">{{ $patient->name }}</p>
+                        <p class="text-sm">{{ $patient->name }}</p>
                     </td>
-                    <td class="text-md">{{ $patient->created_at->format('d-m-Y') }}</td>
+                    <td class="text-sm">{{ $patient->created_at->format('d-m-Y') }}</td>
                    
                 </tr>
                 @endforeach
@@ -162,7 +162,7 @@
 		<ul class="todo-list">
 			@foreach($specialities as $speciality)
 			<li>
-				<p>{{ $speciality->name }}</p>
+				<p class="text-[14px]">{{ $speciality->name }}</p>
 				<div>
 					<a href="#" data-toggle="modal" data-target="#editspecialityModal{{ $speciality->id }}" data-speciality-name="{{ $speciality->name }}"><i class='bx bx-edit'></i></a>
 					<a href="#" onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this speciality?')) document.getElementById('deletespecialityForm{{ $speciality->id }}').submit();"><i class='bx bx-trash'></i></a>
@@ -176,56 +176,58 @@
 		</ul>
 	</div>
 	
-	<!-- Add speciality Modal -->
 <!-- Add speciality Modal (closed by default) -->
-<div id="addspecialityModal" class="modal fade" tabindex="-1" aria-labelledby="addspecialityModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addspecialityModalLabel">Add speciality</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+<div id="addspecialityModal" class="modal fixed inset-0 overflow-y-auto hidden" tabindex="-1" aria-labelledby="addspecialityModalLabel" aria-hidden="true" data-modal-target="addspecialityModal">
+    <div class="modal-dialog flex items-center justify-center min-h-screen">
+        <div class="modal-content bg-white rounded-lg shadow-lg max-w-md w-full">
+            <div class="modal-header flex justify-between bg-gray-100 py-2 px-4">
+                <h5 class="modal-title text-lg font-semibold" id="addspecialityModalLabel">Add Speciality</h5>
+                <button type="button" class="btn-close" data-modal-hide="addspecialityModal" aria-label="Close">X</button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body p-4">
                 <!-- Form for adding a speciality -->
                 <form action="{{ route('specialities.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label for="name">Speciality Name:</label>
-                        <input type="text" class="form-control" id="name" name="name" required>
+                        <label for="name" class="font-semibold">Speciality Name:</label>
+                        <input type="text" class="form-input border border-[#DBE7C9] px-2 py-2 rounded-xl focus:outline-none" id="name" name="name" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add speciality</button>
+                    <button type="submit" class="bg-[#99BC85] text-white font-semibold text-md px-3 py-1 rounded-full w-full max-w-sm">Add Speciality</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
+
 	
 @foreach($specialities as $speciality)
 <!-- Edit speciality Modal -->
-<div class="modal fade" id="editspecialityModal{{ $speciality->id }}" tabindex="-1" aria-labelledby="editspecialityModalLabel{{ $speciality->id }}" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="editspecialityModalLabel{{ $speciality->id }}">Edit speciality</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<form action="{{ route('specialities.update', $speciality->id) }}" method="POST">
-					@csrf
-					@method('PUT')
-					<div class="form-group">
-						<label for="name">speciality Name:</label>
-						<input type="text" class="form-control" id="name" name="name" value="{{ $speciality->name }}" required>
-					</div>
-					<button type="submit" class="btn btn-primary">Update speciality</button>
-				</form>
-			</div>
-		</div>
-	</div>
+<div class="modal fade hidden" id="editspecialityModal{{ $speciality->id }}" tabindex="-1" aria-labelledby="editspecialityModalLabel{{ $speciality->id }}" aria-hidden="true" data-modal-target="editspecialityModal{{ $speciality->id }}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editspecialityModalLabel{{ $speciality->id }}">Edit speciality</h5>
+                <button type="button" class="close" data-modal-hide="editspecialityModal{{ $speciality->id }}" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('specialities.update', $speciality->id) }}" method="POST">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="name">Speciality Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" value="{{ $speciality->name }}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update speciality</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
+
+
 @endforeach	
 </div>
 
@@ -235,7 +237,7 @@
 	
 
 	<script>
-	 document.addEventListener("DOMContentLoaded", function () {
+	document.addEventListener("DOMContentLoaded", function () {
         const modalToggles = document.querySelectorAll("[data-modal-toggle]");
         const modalCloses = document.querySelectorAll("[data-modal-hide]");
 
@@ -243,8 +245,8 @@
             toggle.addEventListener("click", () => {
                 const target = toggle.getAttribute("data-modal-target");
                 const modal = document.getElementById(target);
-                modal.classList.toggle("hidden");
-                modal.setAttribute("aria-hidden", modal.classList.contains("hidden"));
+                modal.classList.remove("hidden");
+                modal.setAttribute("aria-hidden", "false");
             });
         });
 
@@ -253,10 +255,11 @@
                 const target = close.getAttribute("data-modal-hide");
                 const modal = document.getElementById(target);
                 modal.classList.add("hidden");
-                modal.setAttribute("aria-hidden", modal.classList.contains("hidden"));
+                modal.setAttribute("aria-hidden", "true");
             });
         });
     });
+
    
 		const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
 

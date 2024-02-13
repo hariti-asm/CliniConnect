@@ -118,7 +118,13 @@ class AdminController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $speciality = Speciality::findOrFail($id);
+    
+        $speciality->status = 'archived';
+    
+        $speciality->save();
+    
+        return redirect()->back()->with('success', 'Speciality added successfully!');
     }
 
     /**
