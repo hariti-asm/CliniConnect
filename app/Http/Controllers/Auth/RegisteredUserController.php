@@ -35,24 +35,33 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'user_type' => ['required', 'integer'],
+            'profile_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Corrected to 'profile_picture'
         ]);
+        
+        // Store profile image
+        if ($request->hasFile('profile_picture')) { // Corrected to 'profile_picture'
+            $imagePath = $request->file('profile_picture')->store('profile_pictures');
+        } else {
+            $imagePath = null;
+        }
         
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'user_type' =>$request->user_type,
+            'user_type' => $request->user_type,
+            'image' => $imagePath,
         ]);
-
+        
         event(new Registered($user));
-
+    
         Auth::login($user);
-
+    
         if ($request->user_type == 1) {
             return redirect(RouteServiceProvider::HOME);
         } else {
             return redirect()->route('doctors.show', ['id' => $user->id]);
         }
-        
-}
+    }
+    
 }
