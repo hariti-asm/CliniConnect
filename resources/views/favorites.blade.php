@@ -2,9 +2,8 @@
 
     <!-- Display patient information -->
     <div class="max-w-[80%] mx-auto">
-        <h1 class="text-2xl font-bold mb-2">Hello {{ $patient->name }}</h1>
     
-        <h2 class="text-xl font-bold mb-2">Preferred Doctors:</h2>
+        <h2 class="text-xl font-bold mb-2 mt-5">Preferred Doctors:</h2>
         <div class="grid grid-cols-3 gap-4">
             @foreach ($preferredDoctors as $favorite)
                 <div class="bg-white shadow-md rounded-lg overflow-hidden">

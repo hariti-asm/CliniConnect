@@ -35,7 +35,9 @@ Route::post('/add-to-favorites', [FavoritesController::class,'store'])->name('ad
 Route::delete('/remove_from_favorites', [FavoritesController::class, 'destroy'])->name('remove_from_favorites');
 Route::get('/favorites', [FavoritesController::class,'get'])->name('favorites');
 
-Route::get('/doctor_detail/{id}',[patientController::class,'doctor_detail'])->name('doctor_detail');
+Route::get('/doctor_detail/{id}',[patientController::class,'doctor_detail'])->middleware(['auth', 'verified'])->name('doctor_detail');
+Route::get('/getCertificateData/{id}',[patientController::class,'getCertificateData'])->middleware(['auth', 'verified'])->name('getCertificateData');
+
 Route::post('/appointments/{session}/book', [patientController::class, 'book'])->name('appointments.book');
 Route::post('/reviews/{id}/store', [patientController::class, 'store'])->name('reviews.store');
 Route::get('/feedback/{id}', [FeedbackController::class, 'show'])->name('feedback.show');
