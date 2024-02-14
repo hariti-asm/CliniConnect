@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Favorite;
 use Illuminate\Http\Request;
 use App\Models\Speciality;
 use App\Models\Illness; 
@@ -26,7 +27,7 @@ class SpecialityController extends Controller
      {
          $specialities = Speciality::all();
          $specialityId = $request->input('speciality');
-     
+         $fn=Favorite::count();
          if ($specialityId) {
              $doctors = User::where('user_type', 2)
                              ->whereHas('speciality', function ($query) use ($specialityId) {
@@ -45,7 +46,9 @@ class SpecialityController extends Controller
          } else {
              $doctors = User::where('user_type', 2)
                             ->with(['reviews' => function ($query) {
-                                 $query->select('doctor_id', DB::raw('avg(rating) as average_rating'))
+                                 $query->select('doctor_id', 
+                                 
+                                 DB::raw('avg(rating) as average_rating'))
                                        ->groupBy('doctor_id');
                              }])
                             ->paginate(6);
@@ -56,7 +59,7 @@ class SpecialityController extends Controller
              }
          }
      
-         return view('welcome', compact('specialities', 'doctors'));
+         return view('welcome', compact('specialities', 'doctors','fn'));
      }
      
     

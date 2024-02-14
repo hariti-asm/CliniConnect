@@ -253,27 +253,28 @@
     <button data-modal-target="comment-modal" data-modal-toggle="default-modal" class="bg-[#99BC85] text-white px-1 py-1 rounded-md text-sm mt-4 ml-5">Add a Comment</button>
 </div>
 
-            @if ($reviews->count() > 0)
-                @foreach ($reviews as $review)
-                    <div class="mt-4 border border-gray-200 rounded-lg p-4">
-                        <div class="flex items-center mb-2">
-                            <img src="{{ $review->patient->image }}" class="w-10 h-10 rounded-full mr-2" alt="Profile Picture">
-                            <div class="font-semibold">{{ $review->patient->name }}</div>
-                            <div class="flex items-center ml-2">
-                                @for ($i = 0; $i < $review->rating; $i++)
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-500" viewBox="0 0 20 20" fill="currentColor">
-                                        <path fill-rule="evenodd" d="M10 2a.75.75 0 0 0-.75.75v6.992L5.28 8.864a.75.75 0 1 0-.53 1.428l3.47 2.624a.75.75 0 0 0 1.06-.648V2.75A.75.75 0 0 0 10 2zm6.22 6.28l-3.47-2.624a.75.75 0 1 0-.53 1.428L15.25 9.742v6.508a.75.75 0 0 0 1.06.648l3.47-2.624a.75.75 0 0 0 0-1.248z" clip-rule="evenodd"/>
-                                    </svg>
-                                @endfor
-                            </div>
-                        </div>
-                        <p class="text-gray-700">{{ $review->comment }}</p>
-                        <div class="text-xs text-gray-500 mt-2">{{ $review->created_at->diffForHumans() }}</div>
-                    </div>
-                @endforeach
-            @else
-                <p class="mt-4">No comments available.</p>
-            @endif
+<div class="grid grid-cols-2 gap-4">
+    @foreach($reviews as $index => $review)
+        <div class="border border-gray-300 rounded-md p-4 mb-4 {{ $index % 2 == 0 ? '' : 'bg-gray-100' }}">
+            <div class="flex gap-4">
+                <img src="../{{$review->patient->image }}" class="rounded-full w-10 h-10">
+                <h5 class="text-md">{{ $review->patient->name }}</h5>
+            </div>
+
+            <p class="text-gray-800 mt-2">{{ $review->comment }}</p>
+            <div class="flex mt-2">
+                @for($i = 1; $i <= 5; $i++)
+                    @if($i <= $review->rating)
+                        <span class="text-yellow-500">&#9733;</span> 
+                    @else
+                        <span class="text-gray-300">&#9733;</span> 
+                    @endif
+                @endfor
+            </div>
+        </div>
+    @endforeach
+</div>
+
         </div>
         
     </div>

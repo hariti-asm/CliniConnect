@@ -19,69 +19,53 @@
      <script src="https://cdn.tailwindcss.com"></script>
      <!-- MAIN CSS -->
      <link rel="stylesheet" href="css/tooplate-style.css">
+     <link rel="stylesheet" href="../css/style.css">
 
 </head>
 <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
-     <!-- PRE LOADER -->
-     <section class="preloader">
-          <div class="spinner">
-
-               <span class="spinner-rotate"></span>
-
-          </div>
-     </section>
-
-
-     <!-- HEADER -->
 
 
 
      <!-- MENU -->
      <section class="navbar navbar-default navbar-static-top" role="navigation">
-          <div class="container">
-
-               <div class="navbar-header">
-                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                         <span class="icon icon-bar"></span>
-                         <span class="icon icon-bar"></span>
-                         <span class="icon icon-bar"></span>
-                    </button>
-
-                    <!-- lOGO TEXT HERE -->
-                    <a href="index.html" class="navbar-brand"><i class="fa fa-h-square"></i>ealth Center</a>
+          <div class="container mx-auto">
+               <div class="flex justify-between items-center py-4">
+                   <!-- Navbar Header -->
+                   <a href="#" class="brand">
+                    <i class='bx bxs-smile'></i>
+                    <span class="text">HealthCare</span>
+                </a>
+           
+                   <!-- Menu Links -->
+                   <div class="flex items-center space-x-4">
+                       @auth
+                           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#6B7280" class="w-8 h-8">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                          </svg>
+                          <p>{{$fn}}</p>
+                       @else
+                           <a href="{{ route('login') }}" class="text-md text-black dark:text-gray-500 underline">Log in</a>
+                           
+                           @if (Route::has('register'))
+                               <a href="{{ route('register') }}" class="text-md text-black dark:text-gray-500 underline">Register</a>
+                           @endif
+                       @endauth
+                   </div>
                </div>
-
-               <!-- MENU LINKS -->
-               <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                         <li><a href="#top" class="text-black text-xl">Home</a></li>
-                         <li><a href="#about" class="smoothScroll">About Us</a></li>
-                         <li><a href="#team" class="smoothScroll">Doctors</a></li>
-                         <li><a href="#news" class="smoothScroll">News</a></li>
-                         <li><a href="#google-map" class="smoothScroll">Contact</a></li>
-                         <li class="appointment-btn"><a href="#appointment">Make an appointment</a></li>
-                    </ul>
-                    @if (Route::has('login'))
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="text-5xl text-black dark:text-gray-500 underline">Dashboard</a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-sm text-black dark:text-gray-500 underline">Log in</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="ml-4 text-sm text-blackdark:text-gray-500 underline">Register</a>
-                        @endif
-                    @endauth
-            @endif 
-               </div>
-
-          </div>
+           </div>
+           
      </section>
 
 
      <!-- HOME -->
      <section id="home" class="slider" data-stellar-background-ratio="0.5">
           <div class="container">
+
+
+
+
+     
                <div class="row">
 
                          <div class="owl-carousel owl-theme">
@@ -151,13 +135,12 @@
      <!-- TEAM -->
      <section id="team" data-stellar-background-ratio="1" class="py-8">
           <div class="container mx-auto">
-               <div class="text-center">
+               <div class="text-center ">
                     <h2 class="text-3xl font-bold mb-4">Our Doctors</h2>
                     <form method="GET" action="{{ route('filter_doctors') }}">
                         @csrf
-                        <div class="flex justify-center items-center mb-4">
-                            <div class="mr-2">
-                                <label for="speciality" class="block text-sm font-medium text-gray-700">Select Speciality:</label>
+                        <div class="flex justify-center items-center mb-4 w-full">
+                            <div class="mr-2 flex gap-2">
                                 <select id="speciality" name="speciality" class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-[#a5c422] focus:border-indigo-500">
                                     <option value="">All Specialties</option>
                                     @foreach($specialities as $speciality)
@@ -170,31 +153,43 @@
                     </form>
                 </div>
                 
+                
       
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  @foreach($doctors as $doctor)
-                  <div class="rounded-lg overflow-hidden shadow-md bg-white">
-                      <img src="{{$doctor->image}}" class="w-32 h-32 object-cover object-center rounded-full" alt="Doctor Image">
-                      <div class="p-4">
-                          <h3 class="text-lg font-semibold mb-2">{{ $doctor->name }}</h3>
-                          <p>{{ $doctor->speciality->name }}</p>
-                          <div class="flex items-center justify-between">
-                              <!-- Stars -->
-                              <div class="flex items-center">
-                                  @for ($i = 1; $i <= 5; $i++)
-                                      @if ($i <= $doctor->averageRating)
-                                          <i class="fa fa-star text-yellow-500"></i>
-                                      @else
-                                          <i class="fa fa-star text-gray-500"></i>
-                                      @endif
-                                  @endfor
-                              </div>
-                              <a href="{{route('doctor_detail',['id'=>$doctor->id])}}" class="mt-4 inline-block bg-[#c3df4a] hover:bg-[#9ebb21] hover:text-white text-white font-bold py-2 px-4 rounded">See Details</a>
-                          </div>
-                      </div>
-                  </div>
-                  @endforeach
-              </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    @foreach($doctors as $doctor)
+                    <div class="rounded-lg overflow-hidden shadow-md bg-white">
+                        <img src="{{ $doctor->image }}" class="w-32 h-32 object-cover object-center rounded-full" alt="Doctor Image">
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold mb-2">{{ $doctor->name }}</h3>
+                            <p>{{ $doctor->speciality->name }}</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <!-- Stars -->
+                                <div class="flex items-center space-x-1">
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $doctor->averageRating)
+                                            <i class="fa fa-star text-yellow-500"></i>
+                                        @else
+                                            <i class="fa fa-star text-gray-500"></i>
+                                        @endif
+                                    @endfor
+                                </div>
+                                <!-- See Details Button -->
+                                <a href="{{ route('doctor_detail', ['id' => $doctor->id]) }}" class="inline-block bg-[#c3df4a] hover:bg-[#9ebb21] hover:text-white text-white font-bold py-2 px-4 rounded">See Details</a>
+                                <form action="{{ route('add_to_favorites') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="doctor_id" value="{{ $doctor->id }}">
+                                    <button type="submit">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#6B7280" class="w-8 h-8">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                                        </svg>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                
       
               <div class="mt-8 flex justify-center">
                   {{ $doctors->links() }}

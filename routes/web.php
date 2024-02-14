@@ -17,6 +17,7 @@ use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\SpecialityController;
 use App\Http\Controllers\AdminController;
 
+use App\Http\Controllers\FavoritesController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +31,9 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/', [SpecialityController::class, 'getSpecialities'])->name('filter_doctors');
 // Route::get('/', [SpecialityController::class,'filterDoctors']);
+// routes/web.php
+Route::post('/add-to-favorites', [FavoritesController::class,'store'])->name('add_to_favorites');
+Route::get('/favorites', [FavoritesController::class,'get'])->name('favorites');
 
 Route::get('/doctor_detail/{id}',[patientController::class,'doctor_detail'])->name('doctor_detail');
 Route::post('/appointments/{session}/book', [patientController::class, 'book'])->name('appointments.book');

@@ -116,9 +116,9 @@
         <div class="flex mt-2">
             @for($i = 1; $i <= 5; $i++)
                 @if($i <= $review->rating)
-                    <span class="text-yellow-500">&#9733;</span> <!-- Yellow star -->
+                    <span class="text-yellow-500">&#9733;</span> 
                 @else
-                    <span class="text-gray-300">&#9733;</span> <!-- Gray star -->
+                    <span class="text-gray-300">&#9733;</span> 
                 @endif
             @endfor
         </div>
@@ -135,9 +135,9 @@
         <div class="flex mt-2">
             @for($i = 1; $i <= 5; $i++)
                 @if($i <= $review->rating)
-                    <span class="text-yellow-500">&#9733;</span> <!-- Yellow star -->
+                    <span class="text-yellow-500">&#9733;</span> 
                 @else
-                    <span class="text-gray-300">&#9733;</span> <!-- Gray star -->
+                    <span class="text-gray-300">&#9733;</span> 
                 @endif
             @endfor
         </div>
