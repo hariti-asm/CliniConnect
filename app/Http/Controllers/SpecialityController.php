@@ -25,9 +25,11 @@ class SpecialityController extends Controller
   
      public function getSpecialities(Request $request)
      {
+
+        $patient_id=Auth::user()->id;
+        $fn=Favorite::where('patient_id',$patient_id)->count();
          $specialities = Speciality::all();
          $specialityId = $request->input('speciality');
-         $fn=Favorite::count();
          if ($specialityId) {
              $doctors = User::where('user_type', 2)
                              ->whereHas('speciality', function ($query) use ($specialityId) {

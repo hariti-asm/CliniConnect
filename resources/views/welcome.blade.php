@@ -24,7 +24,7 @@
 </head>
 <body id="top" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
 
-
+{{-- <x-app-layout> --}}
 
 
      <!-- MENU -->
@@ -358,7 +358,7 @@
 
      <!-- FOOTER -->
     <x-footer></x-footer>
-
+{{-- </x-app-layout> --}}
      <!-- SCRIPTS -->
      <script src="js/jquery.js"></script>
      <script src="js/bootstrap.min.js"></script>

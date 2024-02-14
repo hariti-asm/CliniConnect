@@ -35,21 +35,17 @@ class FavoritesController extends Controller
      */
     public function store(Request $request)
     {
-        // Validate the incoming request
         $request->validate([
             'doctor_id' => 'required|exists:users,id',
         ]);
 
-        // Assuming you have an authenticated user, you can get the patient ID
         $patientId = auth()->user()->id;
 
-        // Create a new favorite record
         $favorite = new Favorite();
         $favorite->patient_id = $patientId;
         $favorite->doctor_id = $request->doctor_id;
         $favorite->save();
 
-        // You can return a response indicating success
         return redirect()->back()->with('success', 'added successfully');
     }
 
