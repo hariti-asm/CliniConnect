@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Favorite;
+use App\Models\User;
 
 class FavoritesController extends Controller
 {
@@ -38,9 +39,7 @@ class FavoritesController extends Controller
         $request->validate([
             'doctor_id' => 'required|exists:users,id',
         ]);
-
         $patientId = auth()->user()->id;
-
         $favorite = new Favorite();
         $favorite->patient_id = $patientId;
         $favorite->doctor_id = $request->doctor_id;
@@ -57,7 +56,12 @@ class FavoritesController extends Controller
      */
     public function show($id)
     {
-        //
+        $patient = User::findOrFail($id);
+
+        // Load the patient's preferred doctors
+        $preferredDoctors = $patient->favoriteDoctors()->with('doctor')->get();
+    
+        return view('favorites', compact('patient', 'preferredDoctors'));
     }
 
     /**
@@ -89,8 +93,21 @@ class FavoritesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $request->validate([
+            'doctor_id' => 'required|exists:favorites,doctor_id',
+        ]);
+
+        $userId = auth()->id();
+        $doctorId = $request->doctor_id;
+
+        Favorite::where('patient_id', $userId)
+            ->where('doctor_id', $doctorId)
+            ->delete();
+
+        return redirect()->back()->with('success', 'Doctor removed from favorites successfully.');
     }
-}
+
+    }
+

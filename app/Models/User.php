@@ -59,9 +59,17 @@ class User extends Authenticatable
     {
         return $this->hasMany(Certificate::class,'doctor_id');
     }
-    public function patients()
-{
-    return $this->hasMany(User::class, 'id');
-}
+        public function patients()
+    {
+        return $this->hasMany(User::class, 'id');
+    }
+    public function favoriteDoctors()
+    {
+        return $this->hasMany(Favorite::class, 'patient_id');
+    }
 
+    public function favoritePatients()
+    {
+        return $this->hasMany(Favorite::class, 'doctor_id');
+    }
 }

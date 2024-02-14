@@ -25,9 +25,10 @@ class SpecialityController extends Controller
   
      public function getSpecialities(Request $request)
      {
+        $patient = auth()->user();
 
         $patient_id=Auth::user()->id;
-        $fn=Favorite::where('patient_id',$patient_id)->count();
+            $fn=Favorite::where('patient_id',$patient_id)->count();
          $specialities = Speciality::all();
          $specialityId = $request->input('speciality');
          if ($specialityId) {
@@ -61,7 +62,7 @@ class SpecialityController extends Controller
              }
          }
      
-         return view('welcome', compact('specialities', 'doctors','fn'));
+         return view('welcome', compact('specialities', 'doctors','fn','patient'));
      }
      
     

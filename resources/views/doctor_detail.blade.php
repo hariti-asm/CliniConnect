@@ -6,7 +6,9 @@
     <title>Doctor Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<x-app-layout  :fn="$fn">
+{{-- <x-app-layout  :fn="$fn"> --}}
+    <x-app-layout>
+
 <body class="bg-gray-100">
   <div id="default-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex items-center justify-center">
     <div class="relative p-4 w-full max-w-2xl max-h-full">

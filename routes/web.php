@@ -30,9 +30,9 @@ use App\Http\Controllers\FavoritesController;
 */
 
 Route::get('/', [SpecialityController::class, 'getSpecialities'])->name('filter_doctors');
-// Route::get('/', [SpecialityController::class,'filterDoctors']);
-// routes/web.php
-Route::post('/add-to-favorites', [FavoritesController::class,'store'])->name('add_to_favorites');
+Route::get('/favorites/{id}',[FavoritesController::class,'show'])->name("favorite_doctors");
+Route::post('/add-to-favorites', [FavoritesController::class,'store'])->name('add_to_favorites');// routes/web.php
+Route::delete('/remove_from_favorites', [FavoritesController::class, 'destroy'])->name('remove_from_favorites');
 Route::get('/favorites', [FavoritesController::class,'get'])->name('favorites');
 
 Route::get('/doctor_detail/{id}',[patientController::class,'doctor_detail'])->name('doctor_detail');
