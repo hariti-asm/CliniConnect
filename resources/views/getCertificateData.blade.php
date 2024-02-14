@@ -9,7 +9,7 @@
             </div>
 
             <!-- Decorative lines -->
-            <div class="border-t border-gray-300 mb-6 pb-6">
+            <div class=" border-gray-300 mb-6 pb-6">
                 <div class="text-xs uppercase text-gray-500 tracking-wide">Medical Certificate</div>
                 <p class="mt-4 text-sm leading-relaxed text-gray-700">
                     This certifies that I, Dr. {{ $certificate->doctor->name }}, have reviewed the patient and confirm the following issues: {{ $certificate->description }}. 
@@ -30,6 +30,11 @@
 </x-app-layout>
 
 <style>
+    .border-t.my-2 {
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
     @media print {
         x-app-layout nav {
             display: none;
