@@ -1,4 +1,3 @@
-<x-app-layout>
     <div class="w-full max-w-[40%] mx-auto bg-white rounded-lg shadow-md p-8">
         @foreach ($certificates as $certificate)
             <div class="flex flex-col items-end">
@@ -27,7 +26,6 @@
             <button onclick="window.print()" class="bg-[#0d9276] hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Print</button>
         </div>
     </div>
-</x-app-layout>
 
 <style>
     .border-t.my-2 {

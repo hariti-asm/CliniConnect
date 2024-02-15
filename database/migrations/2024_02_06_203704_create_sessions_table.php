@@ -21,6 +21,8 @@ class CreateSessionsTable extends Migration
             $table->time('start_time');
             $table->time('end_time');
             $table->enum('status', ['available', 'taken'])->default('available');
+            $table->boolean('approved')->default(false);
+
             $table->timestamps();
         });
     }

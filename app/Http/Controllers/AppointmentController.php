@@ -11,7 +11,8 @@ class AppointmentController extends Controller
     {
         if ($session->status === 'available') {
             $session->update(['status' => 'taken']);
-    
+            // $session->update(['approved' => true]);
+
             return redirect()->back()->with('success', 'Appointment booked successfully.');
         } else {
             return redirect()->back()->with('error', 'The appointment is no longer available.');

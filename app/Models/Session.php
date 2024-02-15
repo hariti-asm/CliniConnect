@@ -15,6 +15,7 @@ class Session extends Model
         'start_time',
         'end_time',
         'status',
+        'approved'
     ];
 
     public function patient()

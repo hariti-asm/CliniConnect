@@ -89,9 +89,13 @@
                 </div>
                 
             </div>
-            <a href="{{ url('getCertificateData', ['patient_id' => auth()->id()]) }}" class="btn bg-[#0d9276] text-white px-1 py-1 rounded-md text-sm">Print medical certificate</a>
+            @foreach ($sessions as $session)
 
-            {{-- <a href="{{ url('#my_modal_8', ['patient_id' => auth()->id()]) }}" class="btn bg-[#0d9276] text-white px-1 py-1 rounded-md text-sm">Print medical certificate</a> --}}
+            @if ($session->approved == true)
+            <a href="{{ url('getCertificateData', ['patient_id' => auth()->id()]) }}" class="btn bg-[#0d9276] text-white px-1 py-1 rounded-md text-sm">Print medical certificate</a>
+        @endif
+        @endforeach
+        
             <div class="">
                 <p id="message-container" class=" hidden bg-[#0d9276] text-white px-4 py-2 mb-4 mr-4 rounded">
                 </p>

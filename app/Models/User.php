@@ -24,7 +24,7 @@ class User extends Authenticatable
         'user_type',
         'speciality_id',
         'phone',
-        'image','status'
+        'image',
     ];
 
     /**

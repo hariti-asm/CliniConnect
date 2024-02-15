@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('password');
             $table->integer('user_type')->nullable();
             $table->text('phone')->nullable();
-            $table->string('status')->default(('approved'));
+            // $table->string('status')->default(('approved'));
             $table->string('image')->nullable();
             $table->foreignId('speciality_id')->nullable()->constrained('specialities');
 
