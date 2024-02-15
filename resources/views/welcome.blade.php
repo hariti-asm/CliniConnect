@@ -39,8 +39,10 @@
            
                    <!-- Menu Links -->
                    <div class="flex items-center space-x-4">
+
                        @auth
-                       <a href="{{route('favorite_doctors',['id'=>$patient->id])}}" class="flex gap-2">
+                       {{-- {{route('favorite_doctors',['id'=>$patient->id])}} --}}
+                       <a href="" class="flex gap-2">
                          <p>{{$fn}}</p>
                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#6B7280" class="w-8 h-8">
                               <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
@@ -177,7 +179,7 @@
                                 </div>
                                 <!-- See Details Button -->
                                 <a href="{{ route('doctor_detail', ['id' => $doctor->id]) }}" class="inline-block bg-[#0d9276] hover:bg-[#9ebb21] hover:text-white text-white font-bold py-2 px-4 rounded">See Details</a>
-                                <form action="{{ route('add_to_favorites') }}" method="post">
+                                <form action="" method="post">
                                     @csrf
                                     <input type="hidden" name="doctor_id" value="{{ $doctor->id }}">
                                     <button type="submit">

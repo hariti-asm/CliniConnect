@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Speciality;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
@@ -12,15 +13,16 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
-
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\UploadedFile;
 class RegisteredUserController extends Controller
 {
     /**
      * Display the registration view.
      */
     public function create(): View
-    {
-        return view('auth.register');
+    {  $specialities = Speciality::all();
+        return view('auth.register', compact('specialities'));
     }
 
     /**
@@ -28,6 +30,8 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+  
+    
     public function store(Request $request): RedirectResponse
     { 
         $request->validate([
@@ -35,12 +39,15 @@ class RegisteredUserController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'user_type' => ['required', 'integer'],
+            'speciality_id'=>['required'],
             'profile_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Corrected to 'profile_picture'
         ]);
         
-        // Store profile image
+        // Store profile image with original name
         if ($request->hasFile('profile_picture')) { // Corrected to 'profile_picture'
-            $imagePath = $request->file('profile_picture')->store('profile_pictures');
+            $profilePicture = $request->file('profile_picture');
+            $imageName = $profilePicture->getClientOriginalName(); // Get the original name of the image
+            $imagePath = $profilePicture->storeAs('profile_pictures', $imageName);
         } else {
             $imagePath = null;
         }
@@ -51,6 +58,7 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
             'user_type' => $request->user_type,
             'image' => $imagePath,
+            'speciality_id'=>$request->speciality_id,
         ]);
         
         event(new Registered($user));
@@ -63,5 +71,6 @@ class RegisteredUserController extends Controller
             return redirect()->route('doctors.show', ['id' => $user->id]);
         }
     }
+    
     
 }

@@ -43,6 +43,7 @@ Route::post('/reviews/{id}/store', [patientController::class, 'store'])->name('r
 Route::get('/feedback/{id}', [FeedbackController::class, 'show'])->name('feedback.show');
 Route::get('/patients/{id}', [PatientController::class, 'show'])->name('patients.show');
 Route::get('/certificates/{id}', [CertificateController::class, 'show'])->name('certificates.show');
+Route::get('/history/{id}', [SessionController::class, 'sessions'])->name('history');
 
 Route::post('/certificates', [CertificateController::class, 'store'])->name('certificates.store');
 Route::get('/sessions/{id}', [SessionController::class, 'show'])->name('sessions.show');

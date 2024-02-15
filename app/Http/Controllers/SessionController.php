@@ -95,4 +95,10 @@ class SessionController extends Controller
     {
         //
     }
+    public function sessions()
+    {
+        $patientSessions = Session::where('patient_id', Auth::id())->get();
+
+        return view('history', compact('patientSessions'));
+    }
 }

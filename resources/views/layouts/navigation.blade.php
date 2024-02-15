@@ -51,6 +51,9 @@
                         <x-dropdown-link :href="route('favorites', ['id' => Auth::user()->id])">
                             {{ __('Favorites') }}
                         </x-dropdown-link>
+                        <x-dropdown-link :href="route('history', ['id' => Auth::user()->id])">
+                            {{ __('History') }}
+                        </x-dropdown-link>
                         
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
