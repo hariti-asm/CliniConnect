@@ -80,10 +80,13 @@ class SessionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function approve(Session $session)
     {
-        //
+        $session->update(['approved' => true]);
+    
+        return back()->with('success', 'Session approved successfully.');
     }
+    
 
     /**
      * Remove the specified resource from storage.

@@ -55,7 +55,11 @@
                             End Time
                         </p>
                     </th>
-                    
+                    <th scope="col" class="px-6 py-3">
+                        <p class="text-lg text-black font-semibold italic"">
+                            Approve
+                        </p>
+                    </th>
                     
                 </tr>
             </thead>
@@ -78,6 +82,16 @@
                                 {{ $session->end_time }}
                             </p>
                         </td>
+                        <td class="px-6 py-4">
+                            <form method="POST" action="{{ route('sessions.approve', $session->id) }}">
+                                @csrf
+                                @method('PATCH') <!-- Use PATCH method to update -->
+                                <button type="submit" class="text-lg text-blue-500 hover:text-blue-700 focus:outline-none">
+                                    Approve
+                                </button>
+                            </form>
+                        </td>
+                        
                        
                     </tr>
                 @endforeach

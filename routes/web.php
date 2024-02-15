@@ -60,6 +60,7 @@ Route::post('/medications', [MedicationController::class, 'store'])->name('medic
 Route::put('/medications/{medicine}', [AdminController::class, 'update'])->name('admin.update');
 Route::delete('/medications/{medicine}', [AdminController::class, 'destroy'])->name('admin.destroy');
 Route::post('/medicationss', [AdminController::class, 'store'])->name('admin.store');
+Route::patch('/sessions/{session}/approve', [SessionController::class, 'approve'])->name('sessions.approve');
 
 
 Route::get('/specialties/create', [SpecialityController::class, 'create'])->name('specialities.create');

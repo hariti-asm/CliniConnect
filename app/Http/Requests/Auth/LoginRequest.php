@@ -1,13 +1,14 @@
-<?php 
+<?php
+
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Support\Str;
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Foundation\Http\FormRequest;
 
 class LoginRequest extends FormRequest
 {
@@ -22,7 +23,7 @@ class LoginRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
+     * @return array
      */
     public function rules(): array
     {
@@ -37,7 +38,7 @@ class LoginRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function authenticate(): void
+    public function authenticate()
     {
         $this->ensureIsNotRateLimited();
 
@@ -50,6 +51,19 @@ class LoginRequest extends FormRequest
         }
 
         RateLimiter::clear($this->throttleKey());
+
+        $user = Auth::user();
+
+        if ($user->user_type == 2) {
+            return Redirect::route('doctors.show',['id' => $user->id]);
+        } elseif($user->user_type == 3){
+            return Redirect::route('admin.index'); 
+
+        }
+        
+        else {
+            return Redirect::route('home'); // Redirect to home page for other user types
+        }
     }
 
     /**
@@ -57,7 +71,7 @@ class LoginRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function ensureIsNotRateLimited(): void
+    public function ensureIsNotRateLimited()
     {
         if (!RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
@@ -80,6 +94,7 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->input('email')) . '|' . $this->ip());
+        return Str::lower($this->input('email')) . '|' . $this->ip();
     }
 }
+

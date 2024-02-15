@@ -103,7 +103,7 @@
                                 </p>
                             </td>
                             <td class="px-6 py-4">
-                                <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#97c0b8] text-white px-1 py-1 rounded-md text-sm">View</button>
+                                <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#97c0b8] text-white px-8 py-2 rounded-md font-semibold text-xl">View</button>
                             </td>
                         </tr>
                     @endif
