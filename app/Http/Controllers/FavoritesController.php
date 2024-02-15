@@ -58,7 +58,6 @@ class FavoritesController extends Controller
     {
         $patient = User::findOrFail($id);
 
-        // Load the patient's preferred doctors
         $preferredDoctors = $patient->favoriteDoctors()->with('doctor')->get();
     
         return view('favorites', compact('patient', 'preferredDoctors'));
@@ -67,7 +66,6 @@ class FavoritesController extends Controller
     {
         $patient = User::findOrFail($id);
 
-        // Load the patient's preferred doctors
         $preferredDoctors = $patient->favoriteDoctors()->with('doctor')->get();
     
         return view('favorites', compact('patient', 'preferredDoctors'));

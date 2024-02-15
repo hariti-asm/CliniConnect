@@ -123,7 +123,7 @@
                 <tr>
                     <th>Patient</th>
                     <th>Logging date</th>
-                    <th>Status</th>
+                    {{-- <th>Status</th> --}}
                 </tr>
             </thead>
             <tbody>
@@ -139,11 +139,11 @@
 							{{ $patient->created_at->format('d-m-Y') }}
 						</p>
 					</td>
-                    <td>
+                    {{-- <td>
                         <span class="bg-[#D3CEDF] text-white text-xs rounded-full px-2 py-1">
                             {{ $patient->status }}
                         </span>
-                    </td>
+                    </td> --}}
                 </tr>
                 @endforeach
             </tbody>
