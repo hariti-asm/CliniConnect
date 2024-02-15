@@ -150,7 +150,7 @@
                                     @endforeach
                                 </select>
                             </div>
-                            <button type="submit" class="bg-[#c3df4a] hover:bg-[#9ebb21] text-white font-bold py-2 px-4 rounded">Filter</button>
+                            <button type="submit" class="bg-[#0d9276] hover:bg-[#0d9276] text-white font-bold py-2 px-4 rounded">Filter</button>
                         </div>
                     </form>
                 </div>
@@ -176,7 +176,7 @@
                                     @endfor
                                 </div>
                                 <!-- See Details Button -->
-                                <a href="{{ route('doctor_detail', ['id' => $doctor->id]) }}" class="inline-block bg-[#c3df4a] hover:bg-[#9ebb21] hover:text-white text-white font-bold py-2 px-4 rounded">See Details</a>
+                                <a href="{{ route('doctor_detail', ['id' => $doctor->id]) }}" class="inline-block bg-[#0d9276] hover:bg-[#9ebb21] hover:text-white text-white font-bold py-2 px-4 rounded">See Details</a>
                                 <form action="{{ route('add_to_favorites') }}" method="post">
                                     @csrf
                                     <input type="hidden" name="doctor_id" value="{{ $doctor->id }}">

@@ -33,7 +33,7 @@ Route::get('/', [SpecialityController::class, 'getSpecialities'])->name('filter_
 Route::get('/favorites/{id}',[FavoritesController::class,'show'])->name("favorite_doctors");
 Route::post('/add-to-favorites', [FavoritesController::class,'store'])->name('add_to_favorites');// routes/web.php
 Route::delete('/remove_from_favorites', [FavoritesController::class, 'destroy'])->name('remove_from_favorites');
-Route::get('/favorites', [FavoritesController::class,'get'])->name('favorites');
+Route::get('/favorites/{id}', [FavoritesController::class,'getFavorites'])->name('favorites');
 
 Route::get('/doctor_detail/{id}',[patientController::class,'doctor_detail'])->middleware(['auth', 'verified'])->name('doctor_detail');
 Route::get('/getCertificateData/{id}',[patientController::class,'getCertificateData'])->middleware(['auth', 'verified'])->name('getCertificateData');

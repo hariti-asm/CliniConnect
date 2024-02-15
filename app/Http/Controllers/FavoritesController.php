@@ -63,6 +63,15 @@ class FavoritesController extends Controller
     
         return view('favorites', compact('patient', 'preferredDoctors'));
     }
+    public function getFavorites($id)
+    {
+        $patient = User::findOrFail($id);
+
+        // Load the patient's preferred doctors
+        $preferredDoctors = $patient->favoriteDoctors()->with('doctor')->get();
+    
+        return view('favorites', compact('patient', 'preferredDoctors'));
+    }
 
     /**
      * Show the form for editing the specified resource.
