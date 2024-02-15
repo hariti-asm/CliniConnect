@@ -49,6 +49,7 @@
                           </svg>
                           
                          </a>
+                         
                        @else
                            <a href="{{ route('login') }}" class="text-md text-black dark:text-gray-500 underline">Log in</a>
                            

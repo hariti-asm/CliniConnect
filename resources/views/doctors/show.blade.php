@@ -77,47 +77,39 @@
             </thead>
             <tbody>
                 @foreach ($sessions as $session)
-                    <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                       
-                        <td class="px-6 py-4 ">
-                            <p class="text-lg">
-
-                                @if ($session->patient)
+                    @if ($session->patient) <!-- Check if patient is assigned -->
+                        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                            <td class="px-6 py-4">
+                                <p class="text-lg">
                                     {{ $session->patient->name }}
-                                @else
-                                    No patient assigned
-                                @endif
-                            </p>
-                        </td>
-                        <td class="px-6 py-4"> 
-                            <p class="text-lg">
-                                {{ $session->patient->email }}
-                            </p>
+                                </p>
                             </td>
-                        <td class="px-6 py-4">
-                            {{ $session->date }}
-                        </td>
-                        <td class="px-6 py-4">
-                            <p >
-                            <p class="text-lg">
-
-                                {{ $session->start_time }}
-                            </p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p class="text-lg">
-                                {{ $session->end_time }}
-                            </p>
-                        </td>
-                        <td class="px-6 py-4">
-                            <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#97c0b8] text-white px-1 py-1 rounded-md text-sm">View</button>
-
-                        </td>
-                       
-                      
-                    </tr>
+                            <td class="px-6 py-4"> 
+                                <p class="text-lg">
+                                    {{ $session->patient->email }}
+                                </p>
+                            </td>
+                            <td class="px-6 py-4">
+                                {{ $session->date }}
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-lg">
+                                    {{ $session->start_time }}
+                                </p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <p class="text-lg">
+                                    {{ $session->end_time }}
+                                </p>
+                            </td>
+                            <td class="px-6 py-4">
+                                <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#97c0b8] text-white px-1 py-1 rounded-md text-sm">View</button>
+                            </td>
+                        </tr>
+                    @endif
                 @endforeach
             </tbody>
+            
         </table>
         <div id="comment-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex items-center justify-center">
             hello
