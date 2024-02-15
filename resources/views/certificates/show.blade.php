@@ -12,13 +12,12 @@
     <link rel="stylesheet" href="../css/animate.css">
     <link rel="stylesheet" href="../css/owl.carousel.css">
     <link rel="stylesheet" href="../css/owl.theme.default.min.css">
-    
+    <link rel="stylesheet" href="css/style.css">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="../css/tooplate-style.css">
-<!-- Boxicons -->
 <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-<!-- My CSS -->
 <link rel="stylesheet" href="../css/style.css">
 
 <!-- MAIN CSS -->
@@ -37,7 +36,7 @@
  
 
  
- <div class="relative overflow-x-auto">
+ <div class="w-full max-w-[70%] mx-auto ml-[250px] mt-10">
     <table class="w-full max-w-7xl mx-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>
@@ -55,15 +54,18 @@
             @foreach ($patients as $patient)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <td class="px-6 py-4">
-                    {{ $patient->name }}
+                    <p class="text-gray-600 text-lg">
+
+                        {{ $patient->patient->name }}
+                    </p>
                 </td>
                 <td class="px-6 py-4">
                     <!-- Button to view certificates -->
-                    <button data-modal-target="comment-modal" data-modal-toggle="comment-modal" class="bg-[#99BC85] text-white px-2 py-1 rounded-md text-sm">Generate</button>
+                    <button data-modal-target="comment-modal" data-modal-toggle="comment-modal" class="bg-[#0D9276] text-white px-2 py-1 rounded-md text-sm">Generate</button>
                 </td>
                 <td class="px-6 py-4">
-                    <button class="bg-[#99BC85] text-white px-2 py-1 rounded-md text-sm">Edit</button>
-                    <button class="bg-[#99BC85] text-white px-2 py-1 rounded-md text-sm" ta-modal-target="comment-modal" data-modal-toggle="comment-modal">View</button>
+                    <button class="bg-[#97c0b8] text-white px-2 py-1 rounded-md text-sm">Edit</button>
+                    <button class="bg-[#97c0b8] text-white px-2 py-1 rounded-md text-sm" ta-modal-target="comment-modal" data-modal-toggle="comment-modal">View</button>
                 </td>
             </tr>
             @endforeach
@@ -111,7 +113,7 @@
                 </div>
                 
                 <!-- Button for generating certificate -->
-                <button type="submit" class="w-full px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600 mb-2">Generate Certificate</button>
+                <button type="submit" class="w-full px-4 py-2 bg-[#0D9276] text-white rounded-md hover:bg-green-600 focus:outline-none focus:bg-green-600 mb-2">Generate Certificate</button>
             </form>
         </div>
     </div>

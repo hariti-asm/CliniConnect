@@ -10,10 +10,10 @@ class Certificate extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', // Title of the certificate
-        'description', // Description of the certificate
-        'date_received', // Date when the certificate was received
-        'issuer', // Entity that issued the certificate
+        'title', 
+        'description',
+        'date_received', 
+        'issuer', 
         'expiration_date',
         'patient_id',
         'doctor_id',

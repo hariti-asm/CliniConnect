@@ -43,22 +43,22 @@ Route::post('/reviews/{id}/store', [patientController::class, 'store'])->name('r
 Route::get('/feedback/{id}', [FeedbackController::class, 'show'])->name('feedback.show');
 Route::get('/patients/{id}', [PatientController::class, 'show'])->name('patients.show');
 Route::get('/certificates/{id}', [CertificateController::class, 'show'])->name('certificates.show');
-Route::get('/medications', [MedicationController::class, 'index'])->name('medications.index');
-Route::put('/medications/{medication}', [MedicationController::class, 'update'])->name('medications.update');
-Route::delete('/medications/{medication}',[MedicationController::class, 'destroy'])->name('medications.destroy');
-Route::post('/medications', [MedicationController::class, 'store'])->name('medications.store');
+
 Route::post('/certificates', [CertificateController::class, 'store'])->name('certificates.store');
 Route::get('/sessions/{id}', [SessionController::class, 'show'])->name('sessions.show');
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 Route::get('/admin/patients', [AdminController::class, 'getPatients'])->name('admin.patients');
 Route::get('/admin/medications', [AdminController::class, 'getMedications'])->name('admin.medications');
 
+Route::get('/medicines', [MedicationController::class, 'index'])->name('medications.index');
+Route::put('/medications/{medication}', [MedicationController::class, 'update'])->name('medications.update');
+Route::delete('/medications/{medication}',[MedicationController::class, 'destroy'])->name('medications.destroy');
+Route::post('/medications', [MedicationController::class, 'store'])->name('medications.store');
 
-
-Route::get('/medications', [AdminController::class, 'index'])->name('medications.index');
+// Route::get('/medications', [AdminController::class, 'index'])->name('medications.index');
 Route::put('/medications/{medicine}', [AdminController::class, 'update'])->name('admin.update');
 Route::delete('/medications/{medicine}', [AdminController::class, 'destroy'])->name('admin.destroy');
-Route::post('/medications', [AdminController::class, 'store'])->name('admin.store');
+Route::post('/medicationss', [AdminController::class, 'store'])->name('admin.store');
 
 
 Route::get('/specialties/create', [SpecialityController::class, 'create'])->name('specialities.create');

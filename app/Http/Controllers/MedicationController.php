@@ -58,16 +58,13 @@ class MedicationController extends Controller
             'dosage' => 'nullable|string',
         ]);
 
-        // Create a new medication instance with the validated data
         $medication = new Medication();
         $medication->name = $validatedData['name'];
         $medication->description = $validatedData['description'];
         $medication->dosage = $validatedData['dosage'];
 
-        // Save the medication to the database
         $medication->save();
 
-        // Redirect back to the page with a success message
         return redirect()->back()->with('success', 'Medication added successfully.');
     }
 

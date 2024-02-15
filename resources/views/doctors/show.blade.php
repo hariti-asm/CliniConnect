@@ -37,28 +37,40 @@
  
 
  
-    <div class="relative overflow-x-auto w-full max-w-7xl mx-auto">
-        <table class="w-full max-w-7xl mt-10 mx-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+ <div class="w-full max-w-[80%] mx-auto ml-[200px] mt-10">
+    <table class="w-full max-w-7xl mt-10 mx-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   
-                    <th scope="col" class="px-6 py-3">
-                        Patient Name
+                    <th scope="col" class="px-4 py-3">
+                        <p class="text-lg text-black font-semibold italic">
+                            Patient Name
+                        </p>
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Patient Email
+                        <p class="text-lg text-black font-semibold italic">
+                            Patient Email
+                        </p>
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Date
+                        <p class="text-lg text-black font-semibold italic">
+                            Date
+                        </p>
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Start Time
+                        <p class="text-lg text-black font-semibold italic">
+                            Start Time
+                        </p>
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        End Time
+                        <p class="text-lg text-black font-semibold italic">
+                            End Time
+                        </p>
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Medical Record
+                        <p class="text-lg text-black font-semibold italic">
+                            Medical Record
+                        </p>
                     </th>
                   
                 </tr>
@@ -67,25 +79,38 @@
                 @foreach ($sessions as $session)
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                        
-                        <td class="px-6 py-4">
-                            @if ($session->patient)
-                                {{ $session->patient->name }}
-                            @else
-                                No patient assigned
-                            @endif
+                        <td class="px-6 py-4 ">
+                            <p class="text-lg">
+
+                                @if ($session->patient)
+                                    {{ $session->patient->name }}
+                                @else
+                                    No patient assigned
+                                @endif
+                            </p>
                         </td>
-                        <td class="px-6 py-4">  {{ $session->patient->email }}</td>
+                        <td class="px-6 py-4"> 
+                            <p class="text-lg">
+                                {{ $session->patient->email }}
+                            </p>
+                            </td>
                         <td class="px-6 py-4">
                             {{ $session->date }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $session->start_time }}
+                            <p >
+                            <p class="text-lg">
+
+                                {{ $session->start_time }}
+                            </p>
                         </td>
                         <td class="px-6 py-4">
-                            {{ $session->end_time }}
+                            <p class="text-lg">
+                                {{ $session->end_time }}
+                            </p>
                         </td>
                         <td class="px-6 py-4">
-                            <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#99BC85] text-white px-1 py-1 rounded-md text-sm">View</button>
+                            <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#97c0b8] text-white px-1 py-1 rounded-md text-sm">View</button>
 
                         </td>
                        
@@ -98,6 +123,7 @@
             hello
         </div>
     </div>
+    <script src="../js/script.js"></script>
      <script>
         document.addEventListener("DOMContentLoaded", function () {
             const modalToggles = document.querySelectorAll("[data-modal-toggle]");

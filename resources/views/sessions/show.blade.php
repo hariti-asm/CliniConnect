@@ -34,20 +34,26 @@
  
 
  
-    <div class="relative overflow-x-auto">
-        <table class="w-full max-w-7xl mt-10 mx-auto  text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+ <div class="w-full max-w-[76%] mx-auto ml-[300px] mt-10">
+    <table class="w-full max-w-7xl mt-10 mx-auto  text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-[#e6f4f1] dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   
                     
                     <th scope="col" class="px-6 py-3">
-                        Date
+                        <p class="text-lg text-black font-semibold italic">
+                            Date
+                        </p>
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Start Time
+                        <p class="text-lg text-black font-semibold italic"">
+                            Start Time
+                        </p>
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        End Time
+                        <p class="text-lg text-black font-semibold italic"">
+                            End Time
+                        </p>
                     </th>
                     
                     
@@ -58,13 +64,19 @@
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                        
                         <td class="px-6 py-4">
-                            {{ $session->created_at->format('m-d-Y') }}
+                            <p class="text-lg">
+                                {{ $session->created_at->format('m-d-Y') }}
+                            </p>
                         </td>
                         <td class="px-6 py-4">
-                            {{ $session->start_time }}
+                            <p class="text-lg">
+                                {{ $session->start_time }}
+                            </p>
                         </td>
                         <td class="px-6 py-4">
-                            {{ $session->end_time }}
+                            <p class="text-lg">
+                                {{ $session->end_time }}
+                            </p>
                         </td>
                        
                     </tr>
