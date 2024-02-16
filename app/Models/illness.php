@@ -16,4 +16,9 @@ class illness extends Model
     {
         return $this->belongsTo(Speciality::class);
     }
+    public function medications()
+{
+    return $this->hasMany(Medication::class);
+}
+
 }

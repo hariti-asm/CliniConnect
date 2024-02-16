@@ -1,4 +1,28 @@
-    <div class="w-full max-w-[40%] mx-auto bg-white rounded-lg shadow-md p-8">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ClinniConnect</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="Tooplate">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/owl.carousel.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="css/tooplate-style.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="w-full max-w-[40%] mx-auto bg-white rounded-lg shadow-md p-8 mt-[10%]">
         @foreach ($certificates as $certificate)
             <div class="flex flex-col items-end">
                 <p class="font-semibold">Doctor:{{ $certificate->doctor->name }}</p>
@@ -43,3 +67,5 @@
         }
     }
 </style>
+</body>
+</html>

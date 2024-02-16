@@ -62,7 +62,7 @@ class LoginRequest extends FormRequest
         }
         
         else {
-            return Redirect::route('home'); // Redirect to home page for other user types
+            return Redirect::route('filter_doctors'); // Redirect to home page for other user types
         }
     }
 

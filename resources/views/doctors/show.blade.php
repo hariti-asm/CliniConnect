@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
+
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/animate.css">
@@ -38,18 +40,22 @@
 
  
  <div class="w-full max-w-[80%] mx-auto ml-[200px] mt-10">
-    <table class="w-full max-w-7xl mt-10 mx-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <p class=" w-full max-w-7xl ml-[11%] mt-6 text-[#0D9276] font-semibold italic bg-gray-300 rounded">Sessions</p>
+
+    <table class="w-full max-w-7xl  mx-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   
-                    <th scope="col" class="px-4 py-3">
-                        <p class="text-lg text-black font-semibold italic">
-                            Patient Name
-                        </p>
-                    </th>
+                   
+                   
                     <th scope="col" class="px-6 py-3">
                         <p class="text-lg text-black font-semibold italic">
-                            Patient Email
+                            Start time
+                        </p>
+                    </th>
+                    <th scope="col" class="px-4 py-3">
+                        <p class="text-lg text-black font-semibold italic">
+                          End time
                         </p>
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -57,90 +63,135 @@
                             Date
                         </p>
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        <p class="text-lg text-black font-semibold italic">
-                            Start Time
-                        </p>
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        <p class="text-lg text-black font-semibold italic">
-                            End Time
-                        </p>
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        <p class="text-lg text-black font-semibold italic">
-                            Medical Record
-                        </p>
-                    </th>
+                   
+                   
+                   
                   
                 </tr>
             </thead>
             <tbody>
                 @foreach ($sessions as $session)
-                    @if ($session->patient) <!-- Check if patient is assigned -->
+                    @if ($session->patient) 
+                    {{-- @dd($session->patient) --}}
+                    {{-- {{$session->doctor->speciality->name}} --}}
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <td class="px-6 py-4">
-                                <p class="text-lg">
-                                    {{ $session->patient->name }}
-                                </p>
-                            </td>
-                            <td class="px-6 py-4"> 
-                                <p class="text-lg">
-                                    {{ $session->patient->email }}
-                                </p>
-                            </td>
-                            <td class="px-6 py-4">
-                                {{ $session->date }}
-                            </td>
                             <td class="px-6 py-4">
                                 <p class="text-lg">
                                     {{ $session->start_time }}
                                 </p>
                             </td>
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4"> 
                                 <p class="text-lg">
-                                    {{ $session->end_time }}
+
+                                    {{ $session->end_time}}
                                 </p>
                             </td>
+                           
+                          
+                           
+                            
                             <td class="px-6 py-4">
-                                <button data-modal-target="default-modal" data-modal-toggle="default-modal" class="bg-[#97c0b8] text-white px-8 py-2 rounded-md font-semibold text-xl">View</button>
+                                <p class="text-lg">
+                                    {{ $session->created_at }}
+                                </p>
                             </td>
+                           
+                            
+                          
+                       
                         </tr>
                     @endif
                 @endforeach
             </tbody>
             
         </table>
-        <div id="comment-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex items-center justify-center">
-            hello
-        </div>
-    </div>
+        
+
+        <p class=" w-full max-w-7xl ml-[11%] mt-6 text-[#0D9276] font-semibold italic bg-gray-300 rounded">Medical records</p>
+        <table class="w-full max-w-7xl  mx-auto text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                    <tr>
+                        <th scope="col" class="px-6 py-3">
+                            <p class="text-lg text-black font-semibold italic">Patient</p>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            <p class="text-lg text-black font-semibold italic">Illness</p>
+                        </th>
+                        
+                        <th scope="col" class="px-6 py-3">
+                            <p class="text-lg text-black font-semibold italic">Medications</p>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            <p class="text-lg text-black font-semibold italic">Dosage</p>
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            <p class="text-lg text-black font-semibold italic">Date</p>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($patients as $patient)
+                        @foreach ($patientIllnesses[$patient->id] as $illnessName => $illnesses)
+                            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                @foreach ($sessions as $session)
+
+                                <td>
+
+                                    <p>{{$session->patient->name}}</p>
+                                </td>
+                                @endforeach
+                                <td class="px-6 py-4">{{ $illnessName }}</td>
+                                <td class="px-6 py-4">
+                                    <ul>
+                                        @foreach ($illnesses as $illness)
+                                        {{-- @dd($illness->name) --}}
+                                            {{-- @foreach ($illness->medications as $medication) --}}
+                                                <li>{{ $illness->name }}</li>
+                                            {{-- @endforeach --}}
+                                        @endforeach
+                                    </ul>
+                                </td>
+                                <td class="px-6 py-4">
+                                    <ul>
+                                                <li>{{ $illness->dosage }}</li>
+                                    </ul>
+                                </td>
+                                <td class="px-6 py-4">{{ $session->created_at->format('Y-m-d') }}</td>
+                            </tr>
+                        @endforeach
+                    @endforeach
+                </tbody>
+                
+                
+                
+                
+                
+                
+            </table>
+            
+        
+        
+        
     <script src="../js/script.js"></script>
-     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const modalToggles = document.querySelectorAll("[data-modal-toggle]");
-            const modalCloses = document.querySelectorAll("[data-modal-hide]");
-
-            modalToggles.forEach((toggle) => {
-                toggle.addEventListener("click", () => {
-                    const target = toggle.getAttribute("data-modal-target");
-                    const modal = document.getElementById(target);
-                    modal.classList.toggle("hidden");
-                    modal.setAttribute("aria-hidden", modal.classList.contains("hidden"));
-                });
-            });
-
-            modalCloses.forEach((close) => {
-                close.addEventListener("click", () => {
-                    const target = close.getAttribute("data-modal-hide");
-                    const modal = document.getElementById(target);
-                    modal.classList.add("hidden");
-                    modal.setAttribute("aria-hidden", modal.classList.contains("hidden"));
-                });
-            });
+   
+    <script>
+        // Define openModal function to open the modal
+        function openModal(sessionId) {
+            const modal = document.getElementById(`my_modal_${sessionId}`);
+            modal.showModal();
+        }
+    
+        // Call openModal function when the page is loaded
+        window.addEventListener('DOMContentLoaded', function() {
+            openModal('{{ $session->id }}');
         });
+    
+        // Define closeModal function to close the modal
+        function closeModal(sessionId) {
+            const modal = document.getElementById(`my_modal_${sessionId}`);
+            modal.close();
+        }
     </script>
     
-
 </body>
 </html>

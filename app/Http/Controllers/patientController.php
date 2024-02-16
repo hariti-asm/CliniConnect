@@ -14,14 +14,14 @@ use Illuminate\Http\Request;
 class patientController extends Controller
 {
     public function doctor_detail($id)
-    { 
+    { $patient_id=Auth::user()->id;
         $sessions = Session::where('doctor_id', $id)->get();
         $doctor = User::where('user_type', 2)->where('id', $id)->first();
     
         $reviews = $doctor->reviews;
         $morning_sessions = [];
         $afternoon_sessions = [];
-    
+        $numberOfCertificates = Certificate::where('patient_id', $patient_id)->count();
         foreach ($sessions as $session) {
             $start_time = \Carbon\Carbon::parse($session->start_time);
             if ($start_time->hour >= 8 && $start_time->hour < 13) {
@@ -37,7 +37,7 @@ class patientController extends Controller
             }
         }
     
-        return view('doctor_detail', compact('morning_sessions', 'afternoon_sessions', 'doctor', 'sessions', 'reviews'));
+        return view('doctor_detail', compact('morning_sessions', 'afternoon_sessions', 'doctor', 'sessions', 'reviews','numberOfCertificates'));
     }
     
     public function book(Session $session)
@@ -72,18 +72,8 @@ class patientController extends Controller
  
 public function show()
 {        
-    $doctor = Auth::user();
-    $sessions = Session::where('doctor_id', $doctor->id)->get();
-    $patients = Session::where('doctor_id', $doctor->id)
-                       ->whereNotNull('patient_id')
-                       ->with('patient')
-                       ->get();
-
-    if ($doctor->user_type !== 2) {
-        return redirect()->route('admin.index');
-    }
-
-    return view('doctors.show', compact('doctor', 'patients','sessions'));
+   
+    echo"hello";
 }  
 
 public function getCertificateData(Request $request){

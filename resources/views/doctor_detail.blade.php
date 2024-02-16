@@ -295,7 +295,11 @@
 
             setTimeout(function() {
                 messageContainer.innerText = "";
-            }, 5000);
+            }, 3000);
+            setTimeout(function() {
+        var printButton = document.getElementById('printButton');
+        printButton.style.display = "inline-block"; // Show the print button
+    }, 5000);
         });
       
    </script>

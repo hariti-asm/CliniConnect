@@ -85,12 +85,15 @@
                         <td class="px-6 py-4">
                             <form method="POST" action="{{ route('sessions.approve', $session->id) }}">
                                 @csrf
-                                @method('PATCH') <!-- Use PATCH method to update -->
-                                <button type="submit" class="text-lg text-blue-500 hover:text-blue-700 focus:outline-none">
-                                    Approve
+                                @method('PATCH')
+                                <button type="submit" class="text-white bg-[#0d9276] text-lg px-2 py-1 rounded focus:outline-none {{ $session->approved ? 'hover:cursor-not-allowed bg-[#79a79d]' : '' }}" {{ $session->approved ? 'disabled' : '' }}>
+                                    {{ $session->approved ? 'Approved' : 'Approve' }}
                                 </button>
                             </form>
                         </td>
+                        
+                        
+                        
                         
                        
                     </tr>
@@ -101,6 +104,7 @@
             hello
         </div>
     </div>
+    <script src="../js/script.js"></script>
      <script>
         document.addEventListener("DOMContentLoaded", function () {
             const modalToggles = document.querySelectorAll("[data-modal-toggle]");
