@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="../css/tooplate-style.css">
 
 </head>
-<body >
+<body>
     <x-section :doctor="$doctor"></x-section>
     <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
     <span class="sr-only">Open sidebar</span>
@@ -29,9 +29,9 @@
  
 
  
-    <div class="relative overflow-x-auto w-full max-w-7xl mx-auto">
-        <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+ <div class="w-full max-w-[76%] mx-auto ml-[300px] mt-10">
+    <table class="w-full max-w-7xl mt-10 mx-auto  text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                   
                     <th scope="col" class="px-6 py-3">
@@ -69,9 +69,9 @@
                 @endforeach
             </tbody>
         </table>
-        <div id="comment-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex items-center justify-center">
+        {{-- <div id="comment-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex items-center justify-center">
             hello
-        </div>
+        </div> --}}
     </div>
      <script>
         document.addEventListener("DOMContentLoaded", function () {

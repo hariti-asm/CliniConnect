@@ -70,10 +70,12 @@ class patientController extends Controller
             return redirect()->back()->with('success', 'Review submitted successfully!');
         }
  
-public function show()
+public function show($id)
 {        
-   
-    echo"hello";
+    $doctor=Auth::user()->id;
+    $sessions = Session::where('doctor_id', $id)->get();
+
+    return view('patients.show',compact('doctor','sessions'));
 }  
 
 public function getCertificateData(Request $request){

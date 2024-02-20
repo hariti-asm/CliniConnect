@@ -55,10 +55,7 @@ class SessionController extends Controller
                             ->with('patient')
                             ->get();
      
-         if ($doctor->user_type !== 2) {
-             return redirect()->route('welcome');
-         }
-     
+    
          return view('sessions.show', compact('doctor','sessions'));
      }
 

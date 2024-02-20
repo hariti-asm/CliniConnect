@@ -1,4 +1,28 @@
 
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../css/animate.css">
+    <link rel="stylesheet" href="../css/owl.carousel.css">
+    <link rel="stylesheet" href="../css/owl.theme.default.min.css">
+    <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="../css/style.css">
+  
+    <link rel="stylesheet" href="../css/tooplate-style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../css/tooplate-style.css">
+
+</head>
+<body >
 @props(['doctor'])
 <section id="sidebar">
      <a href="#" class="brand">
@@ -7,13 +31,13 @@
      </a>
      <ul class="side-menu top">
          <li class="active">
-             <a href="{{ route('sessions.show', ['id' => $doctor->id]) }}">
-                 <i class='bx bxs-dashboard text-[#0D9276]' ></i>
+            <a href="{{ route('sessions.show', ['id' => Auth()->user()->id]) }}">
+                <i class='bx bxs-dashboard text-[#0D9276]' ></i>
                  <span class="text-[#0D9276]">Sessions</span>
              </a>
          </li>
          <li>
-             <a href="{{ route('patients.show', ['id' => $doctor->id]) }}">
+             <a href="{{ route('patients.show',['id' => Auth()->user()->id]) }}">
                  <i class='bx bxs-shopping-bag-alt' ></i>
                  <span class="text">Patients</span>
              </a>
@@ -25,13 +49,13 @@
              </a>
          </li>
          <li>
-                 <a href="{{ route('certificates.show',['id'=>$doctor->id]) }}">
+                 <a href="{{ route('certificates.show',['id' => Auth()->user()->id]) }}">
                  <i class='bx bxs-message-dots' ></i>
                  <span class="text">Certificates</span>
              </a>
          </li>
          <li>
-             <a href="{{ route('feedback.show', ['id' => $doctor->id]) }}">
+             <a href="{{ route('feedback.show', ['id' => Auth()->user()->id]) }}">
                  <i class='bx bxs-group' ></i>
                  <span class="text">Feedback</span>
              </a>
@@ -76,7 +100,8 @@
             <span class="num">8</span>
         </a>
         <a href="#" class="profile">
-            <img src="../{{$doctor->image }}">
+           
+            <img src="../{{ Auth()->user()->image }}">
         </a>
     </nav>
  </section>

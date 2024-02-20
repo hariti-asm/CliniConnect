@@ -100,9 +100,9 @@
                 @endforeach
             </tbody>
         </table>
-        <div id="comment-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex items-center justify-center">
+        {{-- <div id="comment-modal" tabindex="-1" aria-hidden="true" class="hidden overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex items-center justify-center">
             hello
-        </div>
+        </div> --}}
     </div>
     <script src="../js/script.js"></script>
      <script>

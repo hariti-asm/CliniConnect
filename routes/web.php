@@ -40,18 +40,25 @@ Route::get('/getCertificateData/{id}',[patientController::class,'getCertificateD
 
 Route::post('/appointments/{session}/book', [patientController::class, 'book'])->name('appointments.book');
 Route::post('/reviews/{id}/store', [patientController::class, 'store'])->name('reviews.store');
-Route::get('/feedback/{id}', [FeedbackController::class, 'show'])->name('feedback.show');
-Route::get('/patients/{id}', [PatientController::class, 'show'])->name('patients.show');
-Route::get('/certificates/{id}', [CertificateController::class, 'show'])->name('certificates.show');
 Route::get('/history/{id}', [SessionController::class, 'sessions'])->name('history');
 
 Route::post('/certificates', [CertificateController::class, 'store'])->name('certificates.store');
-Route::get('/sessions/{id}', [SessionController::class, 'show'])->name('sessions.show');
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-Route::get('/admin/patients', [AdminController::class, 'getPatients'])->name('admin.patients');
-Route::get('/admin/medications', [AdminController::class, 'getMedications'])->name('admin.medications');
+Route::middleware('user.type3')->prefix('admin')->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::delete('/{specialty}', [SpecialityController::class, 'destroy'])->name('specialities.destroy');
+    Route::get('/reviews', [AdminController::class, 'create'])->name('reviews.create');
+    Route::get('/patients', [AdminController::class, 'getPatients'])->name('admin.patients');
+    Route::get('/medications', [AdminController::class, 'getMedications'])->name('admin.medications');
+});
 
-Route::get('/medicines', [MedicationController::class, 'index'])->name('medications.index');
+Route::middleware('user.type2')->group(function(){
+    Route::get('/patients/{id}', [PatientController::class, 'show'])->name('patients.show');
+    Route::get('/feedback/{id}', [FeedbackController::class, 'show'])->name('feedback.show');
+    Route::get('/certificates/{id}', [CertificateController::class, 'show'])->name('certificates.show');
+    Route::get('/sessions/{id}', [SessionController::class, 'show'])->name('sessions.show');
+    Route::get('/medicines', [MedicationController::class, 'index'])->name('medications.index');
+});
+
 Route::put('/medications/{medication}', [MedicationController::class, 'update'])->name('medications.update');
 Route::delete('/medications/{medication}',[MedicationController::class, 'destroy'])->name('medications.destroy');
 Route::post('/medications', [MedicationController::class, 'store'])->name('medications.store');
@@ -71,8 +78,6 @@ Route::get('/specialties/{specialty}/edit', [SpecialityController::class, 'edit'
 
 Route::put('/specialties/{specialty}', [SpecialityController::class, 'update'])->name('specialities.update');
 
-Route::delete('/admin/{specialty}', [SpecialityController::class, 'destroy'])->name('specialities.destroy');
-Route::get('admin/reviews', [AdminController::class, 'create'])->name('reviews.create');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
